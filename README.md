@@ -19,7 +19,7 @@ Secondary Entity Attributes: Description, Illustrator, Release Date, Audience Ra
 Each main entity will have a single associated image.
 
 ### Categorization
-Each card will be divided according to its collection.
+Each card will be categorized according to the collection it belongs to.
 
 
 
