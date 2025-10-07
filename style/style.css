@@ -283,8 +283,6 @@
     cursor: pointer;
     transform: translateY(20px);
     transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
 }
 
 .pokemon-card:hover .btn-view-details {
@@ -294,8 +292,6 @@
 .btn-view-details:hover {
     background: #ff5252;
     transform: scale(1.05);
-    color: white;
-    text-decoration: none;
 }
 
 /* Contenido de la carta */
