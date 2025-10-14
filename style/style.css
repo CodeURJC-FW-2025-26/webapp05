@@ -349,7 +349,7 @@
     display: flex;
     justify-content: center;
     border-radius: 15px;
-    background: linear-gradient(135deg,#4ECDC4 0%,  #FF6B6B 100%);
+    background: linear-gradient(135deg, #4ECDC4 0%, #FF6B6B 100%);
     padding: 5px;
     width: 35%;
     margin: 0 auto;
@@ -366,6 +366,7 @@
 .form-main-content {
     padding: 20px;
 }
+
 .cancel-btn {
     background: #FF6B6B !important;
     border-color: #df5757 !important;
@@ -374,8 +375,10 @@
 .cancel-btn:hover {
     background: #df5757 !important;
 }
+
 .save-btn {
-    background: #4ECDC4 !important;;
+    background: #4ECDC4 !important;
+    ;
     border-color: #3da8a0 !important;
 }
 
@@ -575,6 +578,12 @@
        INICIO PAGINA DETALLE
    =============================== */
 
+.photo-description-form-detail {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* Action buttons under the main info */
 .btn-detail {
     display: flex;
     justify-content: center;
@@ -583,6 +592,56 @@
     margin: 2rem 0;
     flex-wrap: wrap;
 }
+
+.detail-form label,
+.detail-form input,
+.detail-form textarea,
+.detail-form select {
+    width: 100%;
+}
+
+.card-details {
+    margin-bottom: 4em;
+}
+
+.charizard img {
+    max-width: 30em;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.charizard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    margin-left: 2em;
+}
+
+.charizard-details-and-form {
+
+    margin: auto;
+}
+
+.review1,
+.review2,
+.review3,
+.review4 {
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-ilustrator {
+    margin-top: 1em;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+
 
 
 
