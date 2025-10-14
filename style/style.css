@@ -326,6 +326,137 @@
     margin: 1rem 0;
 }
 
+.btn-view-addCards {
+    display: block;
+    width: max-content;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    margin: 2rem auto 0;
+}
+
+/* ===============================
+    NEW CARD specific styles
+   =============================== */
+
+.form-main-border {
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    background: linear-gradient(135deg,#4ECDC4 0%,  #FF6B6B 100%);
+    padding: 5px;
+    width: 35%;
+    margin: 0 auto;
+}
+
+.form-main-body {
+    border-radius: 15px;
+    background: linear-gradient(135deg, #e9ecf0 0%, #b5c1d5 100%);
+    padding: 10px;
+    width: 100%;
+    margin: 0, 30px auto;
+}
+
+.form-main-content {
+    padding: 20px;
+}
+.cancel-btn {
+    background: #FF6B6B !important;
+    border-color: #df5757 !important;
+}
+
+.cancel-btn:hover {
+    background: #df5757 !important;
+}
+.save-btn {
+    background: #4ECDC4 !important;;
+    border-color: #3da8a0 !important;
+}
+
+.save-btn:hover {
+    background: #3da8a0 !important;
+}
+
+/* ===============================
+   FOOTER
+   =============================== */
+
+.pokemon-footer {
+    background: linear-gradient(135deg, #4ECDC4 0%, #FF6B6B 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.footer-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* ===============================
+   HORARIO
+   =============================== */
+
+.schedule-title {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.schedule-days p {
+    color: #FFFFFF;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================
+   BOTÓN BACK TO TOP
+   =============================== */
+
+.back-to-top-btn {
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.back-to-top-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #FFE066;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===============================
+   DECORACIÓN FOOTER
+   =============================== */
+
+.footer-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ===============================
+   DISTRIBUCIÓN FOOTER
+   =============================== */
+
+.pokemon-footer .container-fluid {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
 
 /* FIN DE LA PÁGINA PRINCIPAL */
 
