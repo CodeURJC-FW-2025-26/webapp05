@@ -630,6 +630,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid #764ba2;
+    border-radius: 12px;
+
 }
 
 .card-ilustrator {
@@ -639,6 +642,11 @@
     text-align: center;
     margin-bottom: 0.5rem;
     font-style: italic;
+}
+
+#button-create {
+    display: block;
+    margin: auto;
 }
 
 
