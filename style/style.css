@@ -334,7 +334,7 @@
     display: flex;
     justify-content: center;
     border-radius: 15px;
-    background: 5px linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg,#4ECDC4 0%,  #FF6B6B 100%);
     padding: 5px;
     width: 35%;
     margin: 0 auto;
@@ -349,13 +349,20 @@
 .form-main-content {
     padding: 20px;
 }
+.cancel-btn {
+    background: #FF6B6B !important;
+    border-color: #df5757 !important;
+}
 
+.cancel-btn:hover {
+    background: #df5757 !important;
+}
 .save-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;;
-    border-color: none !important;
+    background: #4ECDC4 !important;
+    border-color: #3da8a0 !important;
 }
 .save-btn:hover {
-    background: linear-gradient(135deg, #5965d5 0%, #5a3aa4 100%) !important;
+    background: #3da8a0 !important;
 }
 
 /* ===============================
