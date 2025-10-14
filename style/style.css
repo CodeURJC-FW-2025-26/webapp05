@@ -375,8 +375,8 @@
     background: #df5757 !important;
 }
 .save-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;;
-    border-color: none !important;
+    background: #4ECDC4 !important;;
+    border-color: #3da8a0 !important;
 }
 
 .save-btn:hover {
