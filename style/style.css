@@ -326,6 +326,21 @@
     margin: 1rem 0;
 }
 
+.btn-view-addCards {
+    display: block;
+    width: max-content;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    margin: 2rem auto 0;
+}
+
 /* ===============================
     NEW CARD specific styles
    =============================== */
@@ -339,6 +354,7 @@
     width: 35%;
     margin: 0 auto;
 }
+
 .form-main-body {
     border-radius: 15px;
     background: linear-gradient(135deg, #e9ecf0 0%, #b5c1d5 100%);
@@ -346,6 +362,7 @@
     width: 100%;
     margin: 0, 30px auto;
 }
+
 .form-main-content {
     padding: 20px;
 }
@@ -358,9 +375,10 @@
     background: #df5757 !important;
 }
 .save-btn {
-    background: #4ECDC4 !important;
-    border-color: #3da8a0 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;;
+    border-color: none !important;
 }
+
 .save-btn:hover {
     background: #3da8a0 !important;
 }
@@ -439,4 +457,5 @@
     padding-left: 2rem;
     padding-right: 2rem;
 }
+
 /* FIN DE LA PÁGINA PRINCIPAL */
