@@ -326,5 +326,37 @@
     margin: 1rem 0;
 }
 
+/* ===============================
+    NEW CARD specific styles
+   =============================== */
+
+.form-main-border {
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    background: 5px linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 5px;
+    width: 35%;
+    margin: 0 auto;
+}
+.form-main-body {
+    border-radius: 15px;
+    background: linear-gradient(135deg, #e9ecf0 0%, #b5c1d5 100%);
+    padding: 10px;
+    width: 100%;
+    margin: 0, 30px auto;
+}
+.form-main-content {
+    padding: 20px;
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;;
+    border-color: none !important;
+}
+.save-btn:hover {
+    background: linear-gradient(135deg, #5965d5 0%, #5a3aa4 100%) !important;
+}
+
 
 /* FIN DE LA PÁGINA PRINCIPAL */
