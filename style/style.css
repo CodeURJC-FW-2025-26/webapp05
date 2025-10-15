@@ -528,26 +528,27 @@
     align-items: center;
     border: 2px solid #764ba2;
     border-radius: 12px;
-
-    .card-ilustrator {
-        margin-top: 1em;
-        font-size: 0.9rem;
-        color: #7f8c8d;
-        text-align: center;
-        margin-bottom: 0.5rem;
-        font-style: italic;
-    }
-
-    #button-create {
-        display: block;
-        margin: auto;
-    }
-
-    td,
-    th {
-        padding: 0.5em;
-    }
 }
+
+.card-ilustrator {
+    margin-top: 1em;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+#button-create {
+    display: block;
+    margin: auto;
+}
+
+td,
+th {
+    padding: 0.5em;
+}
+
 
 
 
