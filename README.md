@@ -100,7 +100,13 @@ You can filter each card by `card_name`.
 * Pulido de página nuevo elemento https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a58be80cf0c7abaefed77e2e602ade94263b3535
 * Pulido de página nuevo elemento  https://github.com/CodeURJC-FW-2025-26/webapp05/commit/079561d397b9175db70ee4a04d7abab115c07aba
 
+### Ficheros mas trabajados:
 
+    create new card.html
+    styles.css
+    index.html (traducción)
+    detail.html (traducción)
+    pageScreenshots
     
 
 
