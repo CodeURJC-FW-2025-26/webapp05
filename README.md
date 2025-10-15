@@ -34,7 +34,7 @@ Each main entity will have a single associated `card_image`.
 ### Categorization
 Each card will be divided according to its `collection_number`.
 
-Yo can filter each card by `card_name`.
+You can filter each card by `card_name`.
 
 
 
