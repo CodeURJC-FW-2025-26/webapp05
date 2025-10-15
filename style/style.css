@@ -1,5 +1,5 @@
 /* ===============================
-    BANNER POKÉMON - ESTILOS PRINCIPALES
+    POKÉMON BANNER  - MAIN STYLES
    =============================== */
 
 .pokemon-banner {
@@ -17,7 +17,7 @@
 }
 
 /* ===============================
-    SECCIÓN DEL LOGO
+    LOGO SECTION
    =============================== */
 
 .logo-section {
@@ -84,7 +84,7 @@
     border-radius: 50%;
 }
 
-/* Texto de la marca */
+/* Brand */
 .brand-text {
     text-align: left;
 }
@@ -108,7 +108,7 @@
 }
 
 /* ===============================
-    NAVEGACIÓN
+    Navigation
    =============================== */
 
 .nav-section {
@@ -146,7 +146,7 @@
 }
 
 /* ===============================
-    DECORACIÓN CON PATRONES
+    PATTERN DECORATION
    =============================== */
 
 .banner-decoration {
@@ -186,7 +186,7 @@
 
 
 /* ===============================
-    SECCIÓN PRINCIPAL DE CARTAS
+    MAIN SECTION - CARDS
    =============================== */
 
 .store-main {
@@ -209,10 +209,10 @@
 }
 
 /* ===============================
-    GRID DE CARTAS POKÉMON
+    POKÉMON CARDS GRID
    =============================== */
 
-/* Grid de cartas usando Bootstrap */
+/* Card grid with Bootstrap */
 
 .pokemon-card {
     background: #ffffff;
@@ -234,7 +234,7 @@
 }
 
 
-/* Imagen de la carta */
+/* Card image */
 .card-image {
     position: relative;
     height: 250px;
@@ -294,7 +294,7 @@
     transform: scale(1.05);
 }
 
-/* Contenido de la carta */
+/* Card contents */
 .card-content {
     padding: 1.5rem;
     flex-grow: 1;
@@ -403,7 +403,7 @@
 }
 
 /* ===============================
-   HORARIO
+   OPENING HOURS
    =============================== */
 
 .schedule-title {
@@ -419,7 +419,7 @@
 }
 
 /* ===============================
-   BOTÓN BACK TO TOP
+    BACK TO TOP BUTTON
    =============================== */
 
 .back-to-top-btn {
@@ -439,7 +439,7 @@
 }
 
 /* ===============================
-   DECORACIÓN FOOTER
+    FOOTER DECORATION
    =============================== */
 
 .footer-decoration {
@@ -453,7 +453,7 @@
 }
 
 /* ===============================
-   DISTRIBUCIÓN FOOTER
+    FOOTER DISTRIBUTION
    =============================== */
 
 .pokemon-footer .container-fluid {
@@ -461,7 +461,7 @@
     padding-right: 2rem;
 }
 
-/* FIN DE LA PÁGINA PRINCIPAL */
+/* MAIN PAGE END */
 
 
 
