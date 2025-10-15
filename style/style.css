@@ -464,116 +464,6 @@
 /* FIN DE LA PÁGINA PRINCIPAL */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ===============================
        INICIO PAGINA DETALLE
    =============================== */
@@ -583,7 +473,6 @@
     margin-bottom: 2em;
 }
 
-/* Action buttons under the main info */
 .btn-detail {
     display: flex;
     justify-content: center;
@@ -608,13 +497,16 @@
     max-width: 30em;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin-top: 1em;
+
 }
 
 .charizard {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px;
-    margin-left: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }
 
 .charizard-details-and-form {
