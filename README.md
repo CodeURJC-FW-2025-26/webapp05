@@ -41,3 +41,47 @@ You can filter each card by `card_name`.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mario Aparisi Castro (practica 1):
+    -Realización de la página principal entera (html y css), realización del banner en todas las páginas y ajuste de detalles 
+    en la práctica en general
+    -Commits más relevantes:
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/c62d85c4a18ea42284fc76e8dc04644df8c080f0
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/fedab9defd2c6a098ab6adb4f8123c02c3b4204a
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/bae0d7337d59983b60d5319cc474ea98baee64a4
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/be15aaabb296b51fb174adb3c72ed6f4e3a912e3
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/05002e74cfd5ac2dcd167c10e0f5e41765a6f36e
+    -Ficheros mas trabajados:
+    index.html
+    style.css
+    imagenes
+    
+
+
+
+
+
