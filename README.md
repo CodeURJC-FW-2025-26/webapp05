@@ -82,6 +82,15 @@ You can filter each card by `card_name`.
     
 
 
+## Javier Rodríguez Gil:
+    Realización del footer y los estilos de este.
+### Commits más relevantes:
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/86362730d23d355d1fd8b52081b1c77dbcff896c
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/54eda168864a9e527e4a9a526305bd588872c388
+### Ficheros mas trabajados:
+    index.html
+    style.css
+    create new card.html
 
 
 
