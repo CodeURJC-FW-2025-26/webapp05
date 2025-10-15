@@ -62,16 +62,19 @@ You can filter each card by `card_name`.
 
 
 
-## David Esteban Bernardo
 
-### Commits más relevantes:
-
-*
-*
-*
-*
-*
-
+David Esteban Bernardo (practica 1):
+    -Realización de la pagina detalle al completo
+    -Commits más relevantes:
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/41b2f17e0f8d4aba742ea3f16e7009063b432774
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/6b4e89a22e6a9ef8a96fa81d544d5b490510a6f4
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/3c879dfb045ddb53b7c4ff4bb379c4b898d610fd
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/83ca9342ac780ce52077f835e2c13f2604ef7171
+    https://github.com/CodeURJC-FW-2025-26/webapp05/commit/9c099b3b0230082155076e362f7b2e4533c7f063
+    -Ficheros mas trabajados:
+    detail.html
+    style.css
+    
 ### Ficheros mas trabajados:
 
 ## Mario Aparisi Castro:
