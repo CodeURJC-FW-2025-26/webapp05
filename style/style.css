@@ -541,6 +541,11 @@
     margin: auto;
 }
 
+td,
+th {
+    padding: 0.5em;
+}
+
 
 
 
