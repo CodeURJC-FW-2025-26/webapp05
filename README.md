@@ -80,6 +80,30 @@ You can filter each card by `card_name`.
     style.css
     imagenes
     
+## Izan González Cuevas
+
+	Encargado de la página nuevo elemento en su totalidad, junto con sus estilos css particulares. Traducción de la página a inglés (comentarios en su mayor parte).
+
+### Commits más relevantes:
+
+
+* Añadido página nuevo elemento con sus consiguientes estilos en el documento css: https://github.com/CodeURJC-FW-2025-26/webapp05/commit/7e1bb76c8117036f79f031954131aa9dbbd34c35
+
+* Pulidos varios en la página nuevo elemento: https://github.com/CodeURJC-FW-2025-26/webapp05/commit/27e4676ff6254a22cf20ece1991da36f1da8bfca
+
+* Pulidos varios en la página nuevo elemento: https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a58be80cf0c7abaefed77e2e602ade94263b3535
+
+* Pulidos varios en la página nuevo elemento: https://github.com/CodeURJC-FW-2025-26/webapp05/commit/079561d397b9175db70ee4a04d7abab115c07aba
+
+* Traducción: https://github.com/CodeURJC-FW-2025-26/webapp05/commit/df214242bc33c7fe13565ff8e51b2fb467bc635b
+
+### Ficheros mas trabajados:
+
+	create new card.html
+	styles.css
+	pageScreenshots
+	index.html
+	detail.html
 
 
 ## Javier Rodríguez Gil:
