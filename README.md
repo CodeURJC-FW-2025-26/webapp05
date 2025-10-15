@@ -46,22 +46,6 @@ You can filter each card by `card_name`.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## David Esteban Bernardo
     Realización de la pagina detalle al completo
 
