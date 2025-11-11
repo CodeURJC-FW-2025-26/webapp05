@@ -70,234 +70,33 @@
                 </div>
             </div>
 
-            <!-- Card Grid -->
+            <!-- Card Grid (rendered from DB) -->
             <div class="row cards-grid">
-                <!-- Card 1: Charizard -->
+                {{#posts}}
                 <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
                     <div class="pokemon-card">
                         <div class="card-image">
-                            <img src="imagenes/coleccion-151/charizard.png" alt="Charizard" class="card-img">
+                            <img src="{{imageFilename}}" alt="{{title}}" class="card-img">
                             <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
+                                <a href="/post/{{_id}}" class="btn-view-details">See Details</a>
                             </div>
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title">Charizard</h3>
-                            <div class="card-collection">151</div>
+                            <h3 class="card-title">{{title}}</h3>
+                            <div class="card-collection">{{collection}}</div>
 
-                            <div class="card-price">€45.99</div>
+                            <div class="card-price">€{{price}}</div>
 
                         </div>
                     </div>
                 </div>
+                {{/posts}}
 
-                <!-- Card 2: Mew -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-151/mew.png" alt="Mew" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Mew</h3>
-                            <div class="card-collection">151</div>
-
-                            <div class="card-price">€89.99</div>
-
-                        </div>
-                    </div>
+                {{^posts}}
+                <div class="col-12 text-center">
+                    <p>No cards available.</p>
                 </div>
-
-                <!-- Card 3: Victini -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-blackbolt/victini.png" alt="Victini" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Victini</h3>
-                            <div class="card-collection">Black Bolt</div>
-
-                            <div class="card-price">€32.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4: Zekrom -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-blackbolt/zekrom.png" alt="Zekrom" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Zekrom</h3>
-                            <div class="card-collection">Black Bolt</div>
-
-                            <div class="card-price">€67.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5: Meloetta -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-legendarytreasures/meloetta.jfif" alt="Meloetta"
-                                class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Meloetta</h3>
-                            <div class="card-collection">Legendary Treasures</div>
-
-                            <div class="card-price">€55.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6: Swablu -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-legendarytreasures/swablu.jfif" alt="Swablu" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Swablu</h3>
-                            <div class="card-collection">Legendary Treasures</div>
-
-                            <div class="card-price">€12.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 7: Groudon -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-paradoxrift/groudon.jfif" alt="Groudon" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Groudon</h3>
-                            <div class="card-collection">Paradox Rift</div>
-
-                            <div class="card-price">€78.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 8: Yveltal -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-paradoxrift/yveltal.jfif" alt="Yveltal" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Yveltal</h3>
-                            <div class="card-collection">Paradox Rift</div>
-
-                            <div class="card-price">€69.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 9: Klinklang -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-plasmastorm/klinklang.jfif" alt="Klinklang" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Klinklang</h3>
-                            <div class="card-collection">Plasma Storm</div>
-
-                            <div class="card-price">€35.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 10: Zapdos -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion-plasmastorm/zapdos.jfif" alt="Zapdos" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Zapdos</h3>
-                            <div class="card-collection">Plasma Storm</div>
-
-                            <div class="card-price">€52.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 11: Giratina -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion.crownzenit/giratina.jfif" alt="Giratina" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Giratina</h3>
-                            <div class="card-collection">Crown Zenith</div>
-
-                            <div class="card-price">€95.99</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 12: Magmortar -->
-                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
-                    <div class="pokemon-card">
-                        <div class="card-image">
-                            <img src="imagenes/coleccion.crownzenit/magmortar.jfif" alt="Magmortar" class="card-img">
-                            <div class="card-overlay">
-                                <a href="detail.html" class="btn-view-details">See Details</a>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Magmortar</h3>
-                            <div class="card-collection">Crown Zenith</div>
-                            <div class="card-price">€42.99</div>
-                        </div>
-                    </div>
-                </div>
+                {{/posts}}
             </div>
             <a href="create new card.html" class="btn-view-addCards">Add Cards</a>
         </div>
