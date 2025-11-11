@@ -12,6 +12,8 @@ const upload = multer({ dest: board.UPLOADS_FOLDER })
 
 router.get('/', async (req, res) => {
 
+    console.log("¡Ruta '/' alcanzada! Buscando posts en MongoDB..."); // <-- AÑADE ESTO
+
     let posts = await board.getPosts();
 
     // Prepare posts for the view: convert _id to string and build image URL
@@ -32,24 +34,30 @@ router.get('/', async (req, res) => {
 
 
 router.post('/post/new', upload.single('image'), async (req, res) => {
+    
+    // Mapea los campos del formulario (req.body) a los nombres de la BBDD
     let post = {
-        user: req.body.user,
-        title: req.body.title,
-        text: req.body.text,
-        imageFilename: req.file?.filename
+        user: "admin", // El formulario no tiene campo 'user', lo ponemos por defecto
+        title: req.body.Name,
+        text: req.body.Description,
+        price: req.body.Price,
+        illustrator: req.body.Illustrator,
+        collection: req.body.Colection,
+        release_date: req.body.Release_date,
+        imageFilename: req.file?.filename // Nombre del archivo subido
     };
 
     const result = await board.addPost(post);
 
-    res.render('saved_post', { _id: result.insertedId.toString() });
-
+    // Redirige al usuario a la página de detalle de la carta recién creada
+    res.redirect('/post/' + result.insertedId.toString());
 });
 
 router.get('/post/:id', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
 
-    res.render('show_post', { post });
+    res.render('detail', { post });
 });
 
 router.get('/post/:id/delete', async (req, res) => {
