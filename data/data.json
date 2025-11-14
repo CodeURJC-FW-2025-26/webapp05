@@ -1,110 +1,74 @@
 [
     {
-        "user": "admin",
+        "coleccion": "151",
         "title": "Charizard",
-        "text": "Charizard is a fiery classic — highly sought after by collectors.",
-        "imageFilename": "imagenes/coleccion-151/charizard.png",
-        "price": "45.99",
-        "illustrator": "Miki Kudo",
-        "collection": "151"
+        "precio": "45.99",
+        "imageFilename": "coleccion-151/charizard.png"
     },
     {
-        "user": "admin",
+        "coleccion": "151",
         "title": "Mew",
-        "text": "A rare, mystical Pokémon card with great aesthetic value.",
-        "imageFilename": "imagenes/coleccion-151/mew.png",
-        "price": "89.99",
-        "illustrator": "Ken Sugimori",
-        "collection": "151"
+        "precio": "89.99",
+        "imageFilename": "coleccion-151/mew.png"
     },
     {
-        "user": "admin",
+        "coleccion": "Black Bolt",
         "title": "Victini",
-        "text": "A small but powerful card from the Black Bolt series.",
-        "imageFilename": "imagenes/coleccion-blackbolt/victini.png",
-        "price": "32.99",
-        "illustrator": "Satoshi Yamamoto",
-        "collection": "Black Bolt"
+        "precio": "32.99",
+        "imageFilename": "coleccion-blackbolt/victini.png"
     },
     {
-        "user": "admin",
+        "coleccion": "Black Bolt",
         "title": "Zekrom",
-        "text": "A striking Electric/Dragon type from Black Bolt.",
-        "imageFilename": "imagenes/coleccion-blackbolt/zekrom.png",
-        "price": "67.99",
-        "illustrator": "Hitoshi Ariga",
-        "collection": "Black Bolt"
+        "precio": "67.99",
+        "imageFilename": "coleccion-blackbolt/zekrom.png"
     },
     {
-        "user": "admin",
+        "coleccion": "Legendary Treasures",
         "title": "Meloetta",
-        "text": "Elegant artwork from the Legendary Treasures set.",
-        "imageFilename": "imagenes/coleccion-legendarytreasures/meloetta.jfif",
-        "price": "55.99",
-        "illustrator": "Naoki Saito",
-        "collection": "Legendary Treasures"
+        "precio": "55.99",
+        "imageFilename": "coleccion-legendarytreasures/meloetta.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Legendary Treasures",
         "title": "Swablu",
-        "text": "A cute and collectible entry from Legendary Treasures.",
-        "imageFilename": "imagenes/coleccion-legendarytreasures/swablu.jfif",
-        "price": "12.99",
-        "illustrator": "Tomokazu Komiya",
-        "collection": "Legendary Treasures"
+        "precio": "12.99",
+        "imageFilename": "coleccion-legendarytreasures/swablu.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Paradox Rift",
         "title": "Groudon",
-        "text": "Powerful land-based Legendary from Paradox Rift.",
-        "imageFilename": "imagenes/coleccion-paradoxrift/groudon.jfif",
-        "price": "78.99",
-        "illustrator": "Kagemaru Himeno",
-        "collection": "Paradox Rift"
+        "precio": "78.99",
+        "imageFilename": "coleccion-paradoxrift/groudon.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Paradox Rift",
         "title": "Yveltal",
-        "text": "Dark and imposing, a favorite of many collectors.",
-        "imageFilename": "imagenes/coleccion-paradoxrift/yveltal.jfif",
-        "price": "69.99",
-        "illustrator": "Ken Sugimori",
-        "collection": "Paradox Rift"
+        "precio": "69.99",
+        "imageFilename": "coleccion-paradoxrift/yveltal.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Plasma Storm",
         "title": "Klinklang",
-        "text": "Mechanical charm from the Plasma Storm set.",
-        "imageFilename": "imagenes/coleccion-plasmastorm/klinklang.jfif",
-        "price": "35.99",
-        "illustrator": "Hideaki Hakozaki",
-        "collection": "Plasma Storm"
+        "precio": "35.99",
+        "imageFilename": "coleccion-plasmastorm/klinklang.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Plasma Storm",
         "title": "Zapdos",
-        "text": "A legendary Electric bird — bold and collectible.",
-        "imageFilename": "imagenes/coleccion-plasmastorm/zapdos.jfif",
-        "price": "52.99",
-        "illustrator": "Ken Sugimori",
-        "collection": "Plasma Storm"
+        "precio": "52.99",
+        "imageFilename": "coleccion-plasmastorm/zapdos.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Crown Zenith",
         "title": "Giratina",
-        "text": "A mysterious Legendary from Crown Zenith.",
-        "imageFilename": "imagenes/coleccion.crownzenit/giratina.jfif",
-        "price": "95.99",
-        "illustrator": "Shin Nagasawa",
-        "collection": "Crown Zenith"
+        "precio": "95.99",
+        "imageFilename": "coleccion.crownzenit/giratina.jfif"
     },
     {
-        "user": "admin",
+        "coleccion": "Crown Zenith",
         "title": "Magmortar",
-        "text": "A fiery addition from Crown Zenith.",
-        "imageFilename": "imagenes/coleccion.crownzenit/magmortar.jfif",
-        "price": "42.99",
-        "illustrator": "Naoki Saito",
-        "collection": "Crown Zenith"
+        "precio": "42.99",
+        "imageFilename": "coleccion.crownzenit/magmortar.jfif"
     }
 ]

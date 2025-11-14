@@ -17,15 +17,6 @@ for(let post of posts){
 
 await fs.rm(UPLOADS_FOLDER, { recursive: true, force: true });
 await fs.mkdir(UPLOADS_FOLDER);
-// Copy demo images to uploads only if data/images exists.
-try {
-    const stats = await fs.stat(DATA_FOLDER + '/images');
-    if (stats && stats.isDirectory()) {
-        await fs.cp(DATA_FOLDER + '/images', UPLOADS_FOLDER, { recursive: true });
-    }
-} catch (err) {
-    // If the folder doesn't exist, skip copying images. The project also serves images from /public/imagenes.
-    console.log('No demo images directory found in data/images — skipping copy.');
-}
+await fs.cp(DATA_FOLDER + '/images', UPLOADS_FOLDER, { recursive: true });
 
 console.log('Demo data loaded');
