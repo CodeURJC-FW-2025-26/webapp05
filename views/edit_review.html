@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/style/style.css" rel="stylesheet">
+</head>
+
+<body class="store-main">
+    <header class="pokemon-banner" style="margin-bottom: 20px;">
+        <div class="container-fluid">
+            <div class="row align-items-center banner-content">
+                <div class="col-12 col-md-6 logo-section">
+                    <div class="logo-container">
+                        <div class="pokeball-logo">
+                            <div class="pokeball-top"></div>
+                            <div class="pokeball-middle">
+                                <div class="pokeball-button"></div>
+                            </div>
+                            <div class="pokeball-bottom"></div>
+                        </div>
+                        <div class="brand-text">
+                            <h1 class="store-name">TCG DEVS</h1>
+                            <p class="store-tagline">Your favorite card shop</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 nav-section">
+                    <nav class="banner-nav">
+                        <ul class="nav-links">
+                            <li><a href="/" class="nav-link">Home</a></li>
+                            <li><a href="#sobres" class="nav-link">Soon</a></li>
+                            <li><a href="#contacto" class="nav-link">Soon</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container" style="text-align: center;">
+            <div class="container py-5">
+                <div class="row mb-5">
+                    <div class="col-12 text-center">
+                        <h2 class="section-title">Edit Review</h2>
+                        <p class="section-subtitle">Update your review details</p>
+                    </div>
+                </div>
+                <div class="form-main-border">
+                    <div class="form-main-body">
+                        <div class="form-main-content">
+                            <form class="detail-form" action="/actualizar_secundario/{{review._id}}" method="POST">
+                                <label for="nickname"><em>Nickname</em></label>
+                                <input id="nickname" name="nickname" value="{{review.nickname}}" required>
+
+                                <label for="date"><em>Date</em></label>
+                                <input id="date" name="date" type="date" value="{{review.date}}" required>
+
+                                <label for="text"><em>Opinion</em></label>
+                                <textarea id="text" name="text" rows="4" required>{{review.text}}</textarea>
+
+                                <label for="rating"><em>Rating</em></label>
+                                <select id="rating" name="rating" required>
+                                    <option value="" disabled>Select rating</option>
+                                    
+                                    <option value="1" {{#review.isRating1}}selected{{/review.isRating1}}>1★</option>
+                                    <option value="2" {{#review.isRating2}}selected{{/review.isRating2}}>2★</option>
+                                    <option value="3" {{#review.isRating3}}selected{{/review.isRating3}}>3★</option>
+                                    <option value="4" {{#review.isRating4}}selected{{/review.isRating4}}>4★</option>
+                                    <option value="5" {{#review.isRating5}}selected{{/review.isRating5}}>5★</option>
+                                    </select>
+
+                                <div class="col-12 d-flex justify-content-between" style="margin-top: 20px;">
+                                     <a href="/post/{{review.postId}}" class="btn-view-details">Cancel</a>
+                                     <button type="submit" class="btn-view-details">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="pokemon-footer">
+        <div class="container-fluid">
+            <div class="row align-items-center py-4 footer-content justify-content-between">
+                <div class="col-auto mb-3 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <div class="pokeball-logo me-3">
+                            <!-- Logo + Text -->
+                            <div class="pokeball-top"></div>
+                            <div class="pokeball-middle">
+                                <div class="pokeball-button"></div>
+                            </div>
+                            <div class="pokeball-bottom"></div>
+                        </div>
+                        <div class="brand-text">
+                            <h1 class="store-name h4 mb-1">TCG DEVS</h1>
+                            <p class="store-tagline small mb-0">Your favorite card shop</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opening hours -->
+                <div class="col-auto mb-3 mb-md-0 mx-auto">
+                    <div class="text-center">
+                        <h3 class="schedule-title h5 mb-3">Opening Hours</h3>
+                        <div class="schedule-days">
+                            <p class="mb-1">Monday - Friday: 10:00 - 20:00</p>
+                            <p class="mb-1">Saturday: 09:00 - 22:00</p>
+                            <p class="mb-0">Sunday: 11:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back to Top button -->
+                <div class="col-auto">
+                    <div class="text-center">
+                        <a href="#" class="back-to-top-btn btn btn-outline-light rounded-pill px-4 py-2">
+                            <i class="fas fa-chevron-up me-2"></i>
+                            Back to Top
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer decorative elements -->
+        <div class="footer-decoration">
+            <div class="pattern-element pattern-1"></div>
+            <div class="pattern-element pattern-2"></div>
+        </div>
+    </footer>
+</body>
+</html>

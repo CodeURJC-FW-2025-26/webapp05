@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Personalized CSS -->
-    <link href="style/style.css" rel="stylesheet">
+    <link href="/style/style.css" rel="stylesheet">
+    <title>{{post.title}} - TCG DEVS</title>
 </head>
 
 <body>
-    <!-- BANNER MAIN -->
     <header class="pokemon-banner">
         <div class="container-fluid">
             <div class="row align-items-center banner-content">
@@ -29,16 +26,15 @@
                         </div>
                         <div class="brand-text">
                             <h1 class="store-name">TCG DEVS</h1>
-                            <p class="store-tagline">Tu tienda de cartas Pokémon</p>
+                            <p class="store-tagline">Your favorite card shop</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Navigation -->
+                
                 <div class="col-12 col-md-6 nav-section">
                     <nav class="banner-nav">
                         <ul class="nav-links">
-                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="/" class="nav-link">Home</a></li>
                             <li><a href="#sobres" class="nav-link">Soon</a></li>
                             <li><a href="#contacto" class="nav-link">Soon</a></li>
                         </ul>
@@ -46,70 +42,53 @@
                 </div>
             </div>
         </div>
+        </header>
 
-        <!-- Pattern decoration -->
-        <div class="banner-decoration">
-            <div class="pattern-element pattern-1"></div>
-            <div class="pattern-element pattern-2"></div>
-            <div class="pattern-element pattern-3"></div>
-        </div>
-    </header>
-
-    <!-- Main -->
     <div class="container-fluid photo-description-form-detail">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12 charizard">
-                <img src="imagenes\coleccion-151\charizard.png" />
+                {{#post.imageFilename}}
+                <img src="/uploads/{{post.imageFilename}}" alt="{{post.title}}" />
+                {{/post.imageFilename}}
+                {{^post.imageFilename}}
+                <img src="/style/default-image.png" alt="Imagen no disponible" /> {{/post.imageFilename}}
             </div>
 
             <div class="col-lg-6 col-md-12 col-xs-12 charizard-details-and-form">
-
                 <div class="card-details">
-
-                    <div class="card-title">Charizard</div>
-
-                    <div class="card-price">45.99€</div>
-
-                    <div class="card-description">
-                        Charizard is an orange, dragon-like, Fire/Flying-type Pokémon
-                        with large wings and a flame on its tail, capable of
-                        flying at high altitudes and breathing extremely hot flames
-                    </div>
-
-                    <div class="card-ilustrator">Ilustrator: Miki Kudo</div>
-
-                    <div class="card-collection">Collection: 151</div>
+                    <div class="card-title">{{post.title}}</div>
+                    <div class="card-price">{{post.precio}}€</div>
+                    <div class="card-description">{{post.text}}</div>
+                    <div class="card-ilustrator">Illustrator: {{post.illustrator}}</div>
+                    <div class="card-collection">Collection: {{post.coleccion}}</div>
 
                     <div class="btn-detail">
-                        <button type="submit" class="btn-view-details">Delete</button>
-                        <button type="submit" class="btn-view-details">Edit</button>
-                        <a href="index.html" class="btn-view-details">Return to main page</a>
+                        <a href="/post/{{post._id}}/delete" class="btn-view-details" onclick="return confirm('¿Estás seguro de que quieres borrar esta carta?');">Delete</a>
+                        <a href="/" class="btn-view-details">Return to main page</a>
                     </div>
-
                 </div>
 
                 <div class="form-details">
-
                     <div>
-                        <form class="detail-form">
+                        <form class="detail-form" action="/post/{{post._id}}/crear_secundario" method="POST">
                             <p><strong>Make a Review!</strong></p>
                             <label for="nickname"><em>Nickname</em></label>
-                            <input id="form" placehorlder="email">
+                            <input id="nickname" name="nickname" placehorlder="Tu apodo" required>
 
                             <label for="date"><em>Date</em></label>
-                            <input id="date" type="date">
+                            <input id="date" name="date" type="date" required>
 
                             <label for="text"><em>Opinion</em></label>
-                            <textarea placehorlder="Write review" rows="4"></textarea>
+                            <textarea id="text" name="text" placehorlder="Write review" rows="4" required></textarea>
 
                             <label for="rating"><em>Rating</em></label>
-                            <select id="selection">
-                                <option value="No value" selected></option>
+                            <select id="rating" name="rating" required>
+                                <option value="" disabled selected>Select rating</option>
                                 <option value="1">1★</option>
                                 <option value="2">2★</option>
-                                <option value="1">3★</option>
-                                <option value="1">4★</option>
-                                <option value="1">5★</option>
+                                <option value="3">3★</option>
+                                <option value="4">4★</option>
+                                <option value="5">5★</option>
                             </select>
 
                             <button type="submit" class="btn-view-details" id="button-create">Create</button>
@@ -120,117 +99,44 @@
         </div>
     </div>
 
-    <div class="container-fluid ">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 col-md-12 col-xs-12 review1">
-                <table>
+            {{#reviews}}
+            <div class="col-lg-6 col-md-12 col-xs-12 review1"> <table>
                     <tr>
                         <td><strong>Nickname:</strong></td>
-                        <td>Albertito12</td>
+                        <td>{{nickname}}</td>
                     </tr>
                     <tr>
                         <td><strong>Date:</strong></td>
-                        <td>14/02/2023</td>
+                        <td>{{date}}</td>
                     </tr>
                     <tr>
                         <td><strong>Opinion:</strong></td>
-                        <td>
-                            Charizard is the crown jewel of my collection, its design and power are amazing.
-                            I've wanted this card since I was a kid, and finally got it!
-                        </td>
+                        <td>{{text}}</td>
                     </tr>
                     <tr>
                         <td><strong>Rating:</strong></td>
-                        <td>5★</td>
+                        <td>{{rating}}★</td>
                     </tr>
                 </table>
-                <button type="submit" class="btn-view-details">Delete</button>
-                <button type="submit" class="btn-view-details">Edit</button>
-            </div>
 
-            <div class="col-lg-6 col-md-12 col-xs-12 review2">
-                <table>
-                    <tr>
-                        <td><strong>Nickname:</strong></td>
-                        <td>Jonasbrother</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Date:</strong></td>
-                        <td>12/01/2022</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Opinion:</strong></td>
-                        <td>
-                            I love the artwork and details, though I expected better stats.
-                            It's a decent card, but not the most exciting in the set.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rating:</strong></td>
-                        <td>3★</td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn-view-details">Delete</button>
-                <button type="submit" class="btn-view-details">Edit</button>
+                <form action="/post/{{postId}}/borrar_secundario/{{_id}}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres borrar esta reseña?');">
+                    <button type="submit" class="btn-view-details">Delete</button>
+                </form>
+                
+                <a href="/editar_secundario/{{_id}}" class="btn-view-details">Edit</a>
             </div>
+            {{/reviews}}
+
+            {{^reviews}}
+            <div class="col-12 text-center" style="padding: 20px;">
+                <p>No hay reseñas para esta carta todavía. ¡Sé el primero!</p>
+            </div>
+            {{/reviews}}
         </div>
     </div>
 
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-xs-12 review3">
-                <table>
-                    <tr>
-                        <td><strong>Nickname:</strong></td>
-                        <td>Pedrito11</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Date:</strong></td>
-                        <td>13/04/2021</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Opinion:</strong></td>
-                        <td>
-                            This card stands out for its rarity and shiny finish.
-                            Perfect for trading and showing off at tournaments.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rating:</strong></td>
-                        <td>4★</td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn-view-details">Delete</button>
-                <button type="submit" class="btn-view-details">Edit</button>
-            </div>
-
-            <div class="col-lg-6 col-md-12 col-xs-12 review4">
-                <table>
-                    <tr>
-                        <td><strong>Nickname:</strong></td>
-                        <td>juanas</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Date:</strong></td>
-                        <td>11/01/2020</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Opinion:</strong></td>
-                        <td>
-                            This Charizard card is just okay.
-                            The artwork is nice, but I expected something a bit more special for such a popular Pokémon.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rating:</strong></td>
-                        <td>2★</td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn-view-details">Delete</button>
-                <button type="submit" class="btn-view-details">Edit</button>
-            </div>
-        </div>
-    </div>
     <!-- Footer -->
     <footer class="pokemon-footer">
         <div class="container-fluid">
@@ -252,7 +158,7 @@
                     </div>
                 </div>
 
-                <!-- Opening Hours -->
+                <!-- Opening hours -->
                 <div class="col-auto mb-3 mb-md-0 mx-auto">
                     <div class="text-center">
                         <h3 class="schedule-title h5 mb-3">Opening Hours</h3>
@@ -264,7 +170,7 @@
                     </div>
                 </div>
 
-                <!-- Back to Top Button -->
+                <!-- Back to Top button -->
                 <div class="col-auto">
                     <div class="text-center">
                         <a href="#" class="back-to-top-btn btn btn-outline-light rounded-pill px-4 py-2">
@@ -282,15 +188,5 @@
             <div class="pattern-element pattern-2"></div>
         </div>
     </footer>
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>
