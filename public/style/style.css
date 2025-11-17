@@ -338,6 +338,62 @@
     margin: 2rem auto 0;
 }
 
+/* Pagination color only - keep Bootstrap pagination appearance */
+.pagination .page-link {
+    background: #ffffff;
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+.pagination .page-link:hover {
+    background: rgba(255, 107, 107, 0.08);
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-link:focus {
+    background: #ff6b6b;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.25);
+}
+
+/* Search button color only (outline style kept) */
+.search-btn {
+    background: transparent !important;
+    color: #ff6b6b !important;
+    border-color: #ff6b6b !important;
+}
+
+.search-btn:hover,
+.search-btn:focus {
+    background: rgba(255, 107, 107, 0.08) !important;
+    color: #ff6b6b !important;
+    border-color: #ff5252 !important;
+}
+
+/* Filter buttons (collections / price) - keep outline but use primary color */
+.filter-btn {
+    background: transparent !important;
+    color: #ff6b6b !important;
+    border-color: #ff6b6b !important;
+}
+
+.filter-btn:hover,
+.filter-btn:focus {
+    background: rgba(255, 107, 107, 0.08) !important;
+    color: #ff6b6b !important;
+    border-color: #ff5252 !important;
+}
+
+.filter-btn.active {
+    background: #ff6b6b !important;
+    color: #fff !important;
+    border-color: #ff6b6b !important;
+}
+
 /* ===============================
     NEW CARD specific styles
    =============================== */

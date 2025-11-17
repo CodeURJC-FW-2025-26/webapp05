@@ -70,5 +70,77 @@
         "title": "Magmortar",
         "precio": "42.99",
         "imageFilename": "coleccion.crownzenit/magmortar.jfif"
+    },
+    {
+        "coleccion": "151",
+        "title": "Alakazam",
+        "precio": "6.99",
+        "imageFilename": "coleccion-151/alakazam.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Arbok",
+        "precio": "8.99",
+        "imageFilename": "coleccion-151/arbok.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Blastoise",
+        "precio": "99.99",
+        "imageFilename": "coleccion-151/blastoise.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Bulbasur",
+        "precio": "24.99",
+        "imageFilename": "coleccion-151/bulbasur.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Charmander",
+        "precio": "39.99",
+        "imageFilename": "coleccion-151/charmander.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Dragonair",
+        "precio": "15.99",
+        "imageFilename": "coleccion-151/dragonair.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Golem",
+        "precio": "2.99",
+        "imageFilename": "coleccion-151/golem.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Jynx",
+        "precio": "4.99",
+        "imageFilename": "coleccion-151/jynx.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Ninetales",
+        "precio": "9.99",
+        "imageFilename": "coleccion-151/ninetales.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Squirtel",
+        "precio": "19.99",
+        "imageFilename": "coleccion-151/squirtel.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Venusaur",
+        "precio": "89.99",
+        "imageFilename": "coleccion-151/venusaur.png"
+    },
+    {
+        "coleccion": "151",
+        "title": "Zapdos",
+        "precio": "79.99",
+        "imageFilename": "coleccion-151/zapdos.png"
     }
 ]

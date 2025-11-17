@@ -67,6 +67,35 @@
                 <div class="col-12 text-center">
                     <h2 class="section-title">Our Pokemon Cards</h2>
                     <p class="section-subtitle">Discover the best sellers</p>
+                    <!-- Search form -->
+                    <form class="d-flex justify-content-center mt-3" method="get" action="/">
+                        <input name="q" value="{{q}}" class="form-control me-2" style="max-width:420px;" type="search"
+                            placeholder="Buscar por nombre" aria-label="Search">
+                        <button class="btn btn-outline-primary search-btn" type="submit">Buscar</button>
+                    </form>
+
+                    <!-- Filters: collections and price ranges -->
+                    <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+                        <!-- Collections -->
+                        {{#collections}}
+                        <a href="/?collection={{name}}{{#q}}&q={{q}}{{/q}}{{#price}}&price={{value}}{{/price}}"
+                            class="btn btn-sm btn-outline-secondary filter-btn {{#current}}active{{/current}}">{{name}}</a>
+                        {{/collections}}
+
+                        <!-- Price ranges -->
+                        <a href="/?price=lt10{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}"
+                            class="btn btn-sm btn-outline-secondary filter-btn {{#price}}{{#is_lt10}}active{{/is_lt10}}{{/price}}">&lt;
+                            €10</a>
+                        <a href="/?price=10-50{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}"
+                            class="btn btn-sm btn-outline-secondary filter-btn {{#price}}{{#is_10_50}}active{{/is_10_50}}{{/price}}">€10
+                            - €50</a>
+                        <a href="/?price=gt50{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}"
+                            class="btn btn-sm btn-outline-secondary filter-btn {{#price}}{{#is_gt50}}active{{/is_gt50}}{{/price}}">&gt;
+                            €50</a>
+
+                        <!-- Clear filters -->
+                        <a href="/" class="btn btn-sm btn-outline-dark">Ver todo</a>
+                    </div>
                 </div>
             </div>
 
@@ -90,6 +119,33 @@
                 </div>
                 {{/posts}}
             </div>
+            <!-- Pagination -->
+            <div class="row mt-4">
+                <div class="col-12 d-flex justify-content-center">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item {{^hasPrev}}disabled{{/hasPrev}}">
+                                <a class="page-link"
+                                    href="{{#hasPrev}}/?page={{prevPage}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}{{/hasPrev}}{{^hasPrev}}#{{/hasPrev}}">Prev</a>
+                            </li>
+
+                            {{#pages}}
+                            <li class="page-item {{#current}}active{{/current}}">
+                                <a class="page-link"
+                                    href="/?page={{num}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}"
+                                    {{#current}}aria-current="page" {{/current}}>{{num}}</a>
+                            </li>
+                            {{/pages}}
+
+                            <li class="page-item {{^hasNext}}disabled{{/hasNext}}">
+                                <a class="page-link"
+                                    href="{{#hasNext}}/?page={{nextPage}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}{{/hasNext}}{{^hasNext}}#{{/hasNext}}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
             <a href="create new card.html" class="btn-view-addCards">Add Cards</a>
         </div>
     </main>
