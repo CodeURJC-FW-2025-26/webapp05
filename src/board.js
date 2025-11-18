@@ -41,12 +41,12 @@ export async function getPostsPaginated(page = 1, perPage = 6, q = '', collectio
     if (q && String(q).trim().length > 0) {
         const term = String(q).trim();
         const regex = new RegExp(term, 'i');
-        filters.push({ title: regex }); 
+        filters.push({ title: regex });
     }
 
     // collection filter
     if (collection && String(collection).trim().length > 0) {
-        filters.push({ coleccion: String(collection).trim() }); 
+        filters.push({ coleccion: String(collection).trim() });
     }
 
     // price filter: support tokens like lt10, 10-50, gt50
@@ -122,7 +122,7 @@ export async function getReview(reviewId) {
 }
 
 export async function updateReview(reviewId, reviewData) {
-    
+
     if (!reviewData.nickname || !reviewData.text || !reviewData.rating) {
         throw new Error('Faltan campos obligatorios');
     }
@@ -134,15 +134,15 @@ export async function updateReview(reviewId, reviewData) {
     const postId = originalReview.postId;
 
     const existingReview = await reviews.findOne({
-        postId: postId,                          
-        nickname: reviewData.nickname,            
-        _id: { $ne: new ObjectId(reviewId) }       
+        postId: postId,
+        nickname: reviewData.nickname,
+        _id: { $ne: new ObjectId(reviewId) }
     });
 
     if (existingReview) {
         throw new Error(`El usuario '${reviewData.nickname}' ya ha enviado una reseña para esta carta.`);
     }
-   
+
     return await reviews.updateOne(
         { _id: new ObjectId(reviewId) },
         {
@@ -154,4 +154,9 @@ export async function updateReview(reviewId, reviewData) {
             }
         }
     );
+}
+
+// Update a post document 
+export async function updatePost(id, postData) {
+    return await posts.updateOne({ _id: new ObjectId(id) }, { $set: postData });
 }

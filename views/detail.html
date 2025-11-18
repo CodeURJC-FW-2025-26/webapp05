@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-12 col-md-6 nav-section">
                     <nav class="banner-nav">
                         <ul class="nav-links">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        </header>
+    </header>
 
     <div class="container-fluid photo-description-form-detail">
         <div class="row">
@@ -58,12 +58,19 @@
                 <div class="card-details">
                     <div class="card-title">{{post.title}}</div>
                     <div class="card-price">{{post.precio}}€</div>
+                    {{#post.description}}
+                    <div class="card-description">{{post.description}}</div>
+                    {{/post.description}}
+                    {{^post.description}}
                     <div class="card-description">{{post.text}}</div>
+                    {{/post.description}}
                     <div class="card-ilustrator">Illustrator: {{post.illustrator}}</div>
                     <div class="card-collection">Collection: {{post.coleccion}}</div>
 
                     <div class="btn-detail">
-                        <a href="/post/{{post._id}}/delete" class="btn-view-details" onclick="return confirm('¿Estás seguro de que quieres borrar esta carta?');">Delete</a>
+                        <a href="/editar/{{post._id}}" class="btn-view-details">Edit</a>
+                        <a href="/post/{{post._id}}/delete" class="btn-view-details"
+                            onclick="return confirm('¿Estás seguro de que quieres borrar esta carta?');">Delete</a>
                         <a href="/" class="btn-view-details">Return to main page</a>
                     </div>
                 </div>
@@ -102,7 +109,8 @@
     <div class="container-fluid">
         <div class="row">
             {{#reviews}}
-            <div class="col-lg-6 col-md-12 col-xs-12 review1"> <table>
+            <div class="col-lg-6 col-md-12 col-xs-12 review1">
+                <table>
                     <tr>
                         <td><strong>Nickname:</strong></td>
                         <td>{{nickname}}</td>
@@ -121,10 +129,11 @@
                     </tr>
                 </table>
 
-                <form action="/post/{{postId}}/borrar_secundario/{{_id}}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres borrar esta reseña?');">
+                <form action="/post/{{postId}}/borrar_secundario/{{_id}}" method="POST" style="display: inline;"
+                    onsubmit="return confirm('¿Estás seguro de que quieres borrar esta reseña?');">
                     <button type="submit" class="btn-view-details">Delete</button>
                 </form>
-                
+
                 <a href="/editar_secundario/{{_id}}" class="btn-view-details">Edit</a>
             </div>
             {{/reviews}}
@@ -189,4 +198,5 @@
         </div>
     </footer>
 </body>
+
 </html>
