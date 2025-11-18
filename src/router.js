@@ -75,7 +75,6 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         if (!coleccion) errors.push('Collection cannot be empty');
         if (!release_date) errors.push('Release date cannot be empty');
         if (!description) errors.push('Description cannot be empty');
-        if (!illustrator) errors.push('Illustrator cannot be empty');
         if (!req.file) errors.push('Image file is required');
 
         // 2) Title must start with an uppercase letter (Unicode aware)
@@ -87,6 +86,11 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         if (title) {
             const existing = await board.getPostByTitle(title);
             if (existing) errors.push('Title must be unique');
+        }
+
+        // Price must be a valid number (Decimal is 0.01, positive, can't be zero)
+        if (isNaN(precio) || parseFloat(precio) <= 0) {
+            errors.push('Price must be a valid positive number greater than zero');
         }
 
         if (errors.length > 0) {
