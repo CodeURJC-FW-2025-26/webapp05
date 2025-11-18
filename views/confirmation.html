@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Confirmación</title>
@@ -7,7 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/style/style.css" rel="stylesheet">
 </head>
+
 <body class="store-main text-center" style="padding-top: 100px;">
+    {{> header}}
     <div class="container">
         <div class="form-main-border">
             <div class="form-main-body">
@@ -16,11 +19,13 @@
                 <p></p>
                 <a href="{{returnUrl}}" class="btn-view-details">Volver ahora</a>
                 {{#createdPostUrl}}
-                    <a href="{{createdPostUrl}}" class="btn-view-details">Ver carta creada</a>
+                <a href="{{createdPostUrl}}" class="btn-view-details">Ver carta creada</a>
                 {{/createdPostUrl}}
                 <p></p>
             </div>
         </div>
     </div>
+    {{> footer}}
 </body>
+
 </html>

@@ -10,42 +10,42 @@
 </head>
 
 <body class="store-main">
-    <header class="pokemon-banner" style="margin-bottom: 20px;">
-        <div class="container-fluid">
-            <div class="row align-items-center banner-content">
-                <div class="col-12 col-md-6 logo-section">
-                    <div class="logo-container">
-                        <div class="pokeball-logo">
-                            <div class="pokeball-top"></div>
-                            <div class="pokeball-middle">
-                                <div class="pokeball-button"></div>
-                            </div>
-                            <div class="pokeball-bottom"></div>
+    {{> header}}
+    <div class="container-fluid">
+        <div class="row align-items-center banner-content">
+            <div class="col-12 col-md-6 logo-section">
+                <div class="logo-container">
+                    <div class="pokeball-logo">
+                        <div class="pokeball-top"></div>
+                        <div class="pokeball-middle">
+                            <div class="pokeball-button"></div>
                         </div>
-                        <div class="brand-text">
-                            <h1 class="store-name">TCG DEVS</h1>
-                            <p class="store-tagline">Your favorite card shop</p>
-                        </div>
+                        <div class="pokeball-bottom"></div>
+                    </div>
+                    <div class="brand-text">
+                        <h1 class="store-name">TCG DEVS</h1>
+                        <p class="store-tagline">Your favorite card shop</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-md-6 nav-section">
-                    <nav class="banner-nav">
-                        <ul class="nav-links">
-                            <li><a href="/" class="nav-link">Home</a></li>
-                            <li><a href="#sobres" class="nav-link">Soon</a></li>
-                            <li><a href="#contacto" class="nav-link">Soon</a></li>
-                        </ul>
-                    </nav>
-                </div>
+            <div class="col-12 col-md-6 nav-section">
+                <nav class="banner-nav">
+                    <ul class="nav-links">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="#sobres" class="nav-link">Soon</a></li>
+                        <li><a href="#contacto" class="nav-link">Soon</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
+    </div>
 
-        <div class="banner-decoration">
-            <div class="pattern-element pattern-1"></div>
-            <div class="pattern-element pattern-2"></div>
-            <div class="pattern-element pattern-3"></div>
-        </div>
+    <div class="banner-decoration">
+        <div class="pattern-element pattern-1"></div>
+        <div class="pattern-element pattern-2"></div>
+        <div class="pattern-element pattern-3"></div>
+    </div>
     </header>
 
     <main>
@@ -57,7 +57,8 @@
                         <p class="section-subtitle">Fill out the form to create a new pokemon card</p>
                     </div>
                 </div>
-                <div class="form-main-border"> <div class="form-main-body">
+                <div class="form-main-border">
+                    <div class="form-main-body">
                         <div class="form-main-content">
                             <form role="form" action="/post/new" method="POST" enctype="multipart/form-data">
                                 <div class="row mb-3">
@@ -114,7 +115,8 @@
 
                                     <div class="col-12">
                                         <label for="illustrator" class="form-label">Illustrator</label>
-                                        <input type="text" id="illustrator" name="illustrator" class="form-control" placeholder="Name of illustrator" required>
+                                        <input type="text" id="illustrator" name="illustrator" class="form-control"
+                                            placeholder="Name of illustrator" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -128,61 +130,12 @@
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
-
-    <!-- Footer -->
-    <footer class="pokemon-footer">
-        <div class="container-fluid">
-            <div class="row align-items-center py-4 footer-content justify-content-between">
-                <div class="col-auto mb-3 mb-md-0">
-                    <div class="d-flex align-items-center">
-                        <div class="pokeball-logo me-3">
-                            <!-- Logo + Text -->
-                            <div class="pokeball-top"></div>
-                            <div class="pokeball-middle">
-                                <div class="pokeball-button"></div>
-                            </div>
-                            <div class="pokeball-bottom"></div>
-                        </div>
-                        <div class="brand-text">
-                            <h1 class="store-name h4 mb-1">TCG DEVS</h1>
-                            <p class="store-tagline small mb-0">Your favorite card shop</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Opening hours -->
-                <div class="col-auto mb-3 mb-md-0 mx-auto">
-                    <div class="text-center">
-                        <h3 class="schedule-title h5 mb-3">Opening Hours</h3>
-                        <div class="schedule-days">
-                            <p class="mb-1">Monday - Friday: 10:00 - 20:00</p>
-                            <p class="mb-1">Saturday: 09:00 - 22:00</p>
-                            <p class="mb-0">Sunday: 11:00 - 18:00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Back to Top button -->
-                <div class="col-auto">
-                    <div class="text-center">
-                        <a href="#" class="back-to-top-btn btn btn-outline-light rounded-pill px-4 py-2">
-                            <i class="fas fa-chevron-up me-2"></i>
-                            Back to Top
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- Footer decorative elements -->
-        <div class="footer-decoration">
-            <div class="pattern-element pattern-1"></div>
-            <div class="pattern-element pattern-2"></div>
-        </div>
-    </footer>
+        {{> footer}}
     </main>
-    </body>
+</body>
+
 </html>
