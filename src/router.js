@@ -52,28 +52,74 @@ router.get('/', async (req, res) => {
     res.render('index', { posts, pages, currentPage: page, totalPages, hasPrev, hasNext, prevPage, nextPage, q, collection, price, collections });
 });
 
+// Serve the create page 
+router.get('/create_new_card.html', (req, res) => {
+    return res.render('create_new_card');
+});
+
 router.post('/post/new', upload.single('image'), async (req, res) => {
     try {
-        let post = {
-            title: req.body.title,
-            precio: req.body.precio,
-            coleccion: req.body.coleccion,
-            release_date: req.body.release_date,
-            text: req.body.text,
-            illustrator: req.body.illustrator,
+        const title = String(req.body.title || '').trim();
+        const precio = String(req.body.precio || '').trim();
+        const coleccion = String(req.body.coleccion || '').trim();
+        const release_date = String(req.body.release_date || '').trim();
+    // support both 'description' and legacy 'text' field names from the form
+    const description = String(req.body.description || req.body.text || '').trim();
+        const illustrator = String(req.body.illustrator || '').trim();
+
+        const errors = [];
+
+        // 1) None of the fields can be empty
+        if (!title) errors.push('Title cannot be empty');
+        if (!precio) errors.push('Price cannot be empty');
+        if (!coleccion) errors.push('Collection cannot be empty');
+        if (!release_date) errors.push('Release date cannot be empty');
+        if (!description) errors.push('Description cannot be empty');
+        if (!illustrator) errors.push('Illustrator cannot be empty');
+        if (!req.file) errors.push('Image file is required');
+
+        // 2) Title must start with an uppercase letter (Unicode aware)
+        if (title && !/^[\p{Lu}]/u.test(title)) {
+            errors.push('Title must start with an uppercase letter');
+        }
+
+        // 3) Title must be unique (case-insensitive)
+        if (title) {
+            const existing = await board.getPostByTitle(title);
+            if (existing) errors.push('Title must be unique');
+        }
+
+        if (errors.length > 0) {
+            // remove uploaded file if validation failed
+            if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
+            // render unified error page (project has error template)
+            const mensaje = errors.join('; ');
+            return res.status(400).render('error', { mensaje, returnUrl: '/create_new_card.html' });
+        }
+
+        const post = {
+            title,
+            precio,
+            coleccion,
+            release_date,
+            description,
+            illustrator,
             imageFilename: req.file?.filename
         };
 
-        await board.addPost(post)
-        
-        res.render('confirmation', {
-            message: 'Carta creada con éxito',
-            returnUrl: '/'
+        const result = await board.addPost(post);
+        const insertedId = result.insertedId?.toString();
+
+        // render confirmation page (project uses confirmation.html)
+        return res.render('confirmation', {
+            message: 'Card created successfully.',
+            returnUrl: `/post/${insertedId}`
         });
 
     } catch (error) {
         console.error(error);
-        res.redirect(`/error?mensaje=Error%20al%20crear%20la%20carta: ${error.message}`);
+        if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
+        return res.redirect(`/error?mensaje=${encodeURIComponent('Internal server error')}`);
     }
 });
 

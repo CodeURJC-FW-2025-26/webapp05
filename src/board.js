@@ -79,6 +79,18 @@ export async function getCollections() {
     return await posts.distinct('coleccion');
 }
 
+// Find a post by title (case-insensitive exact match)
+function escapeRegExp(string) {
+    return String(string).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+export async function getPostByTitle(title) {
+    if (!title) return null;
+    const escaped = escapeRegExp(String(title).trim());
+    const regex = new RegExp(`^${escaped}$`, 'i');
+    return await posts.findOne({ title: { $regex: regex } });
+}
+
 // Review and validation.
 export async function addReview(review) {
     if (!review.nickname || !review.text || !review.rating || !review.postId) {
