@@ -113,7 +113,8 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         // render confirmation page (project uses confirmation.html)
         return res.render('confirmation', {
             message: 'Card created successfully.',
-            returnUrl: `/post/${insertedId}`
+            returnUrl: `/post/${insertedId}`,
+            createdPostUrl: `/post/${insertedId}` // Modified line
         });
 
     } catch (error) {
