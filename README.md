@@ -117,6 +117,14 @@ You can filter each card by `card_name`.
     create new card.html
 
 
+
+
+
+
+
+
+
+
 # Práctica 2:
 
 ## Instrucciones de Ejecución
@@ -182,15 +190,22 @@ Encargado de implementar las rutas y la lógica de edición y borrado de la enti
 
 ## Mario Aparisi Castro:
 
-
+Encargado de implementar la página principal y la conexión a la base de datos,
+implementé paginación de seis cartas por página y cálculo de páginas totales.
+También añadí la búsqueda por nombre y filtros por colección.
 
 ### Commits más relevantes:
-
-
+https://github.com/CodeURJC-FW-2025-26/webapp05/commit/c27c6ce7c2138832f92d2f34fda52a2eca3bcdbf
+https://github.com/CodeURJC-FW-2025-26/webapp05/commit/921c32638866bfcbbf5e8631dfc8687972fbe825
+https://github.com/CodeURJC-FW-2025-26/webapp05/commit/7bc8d8b7181052ba5d9ddb0dd555980c1f04ea42
+https://github.com/CodeURJC-FW-2025-26/webapp05/commit/ce99f42309c65ab6abecfb5f7cff2f41d8a4a32c
 
 ### Ficheros mas trabajados:
 
-
+router.js
+board.js
+index.html
+load_data.js
 
 ## Izan González Cuevas
 
