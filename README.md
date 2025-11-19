@@ -127,46 +127,10 @@ You can filter each card by `card_name`.
 
 # Práctica 2:
 
-## Instrucciones de Ejecución
-
-## Responsabilidad de ficheros:
-
-Se indica la responsabilidad de los ficheros por los diferentes miembros de cada equipo. 
-Los ficheros pueden haber sido trabajados por todos o por uno o varios miembros.
-
-### Ficheros .js
-
-* app.js:
-
-* board.js:
-
-* load_data.js:
-
-* router.js:
-
-### Ficheros .html estáticos
-
-* confirmation.html:
-
-* create_new_card.html:
-
-* detail.html:
-
-* edit_post.html:
-
-* edit_review.html:
-
-* error.html:
-
-* footer.html:
-
-* header.html:
-
-* index.html:
 
 ## Vídeo demostrativo
 
-(aqui enlace al vídeo demostrativo)
+https://youtu.be/AMcx_jbQsIU?si=KtCuLsf1aptRZTSU
 
 ## Participación de cada miembro
 
