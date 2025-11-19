@@ -188,14 +188,21 @@ Los ficheros pueden haber sido trabajados por todos o por uno o varios miembros.
 
 ## Izan González Cuevas
 
-
+Encargado de adaptar la página de nuevo elemento para actualizarla a los nuevos requerimientos: mostrar su vista, realizar validaciones en frontend, añadir funcionalidad al botón de guardar. Añadir funcionalidad backend al creado de la carta: guardado en el servidor, validación backend.
 
 ### Commits más relevantes:
 
-
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/dcdf7eea5b014dd4f1d2914dcad98466a56ac4d0
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/55ef54b406549282de01fd2650dde4daf65c52cd
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a8ce7b88f2dd36bdb7f805bc6a6a87fa7bfd4657
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/91373d43de3209644e8ccceaddc4448ab94738a5
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/81bf243ccecbf8f13da5383230451ca62b57d08e
 
 ### Ficheros mas trabajados:
 
+	create_new_card.html
+	router.js
+	index.html
 
 
 ## Javier Rodríguez Gil:
