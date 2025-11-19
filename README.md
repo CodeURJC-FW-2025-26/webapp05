@@ -117,4 +117,114 @@ You can filter each card by `card_name`.
     create new card.html
 
 
+# Práctica 2:
 
+## Instrucciones de Ejecución
+
+## Responsabilidad de ficheros:
+
+Se indica la responsabilidad de los ficheros por los diferentes miembros de cada equipo. 
+Los ficheros pueden haber sido trabajados por todos o por uno o varios miembros.
+
+### Ficheros .js
+
+* app.js:
+
+* board.js:
+
+* load_data.js:
+
+* router.js:
+
+### Ficheros .html estáticos
+
+* confirmation.html:
+
+* create_new_card.html:
+
+* detail.html:
+
+* edit_post.html:
+
+* edit_review.html:
+
+* error.html:
+
+* footer.html:
+
+* header.html:
+
+* index.html:
+
+## Vídeo demostrativo
+
+(aqui enlace al vídeo demostrativo)
+
+## Participación de cada miembro
+
+## David Esteban Bernardo
+
+Encargado de implementar las rutas y la lógica de edición y borrado de la entidad principal: mostrar la página de detalle y el formulario de edición. También mostrar páginas de confirmación tras actualizar/borrar
+
+
+### Commits más relevantes:
+
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/f053d05532bc0a519c8743cd81296fff8f19c765
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/02014165c8144dbe0ee82d7a53cf571870b48612
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/e9db18c31ffda45b3e2397e91924396dc5b55bae
+
+### Ficheros mas trabajados:
+
+    router.js
+    board.js 
+    edit_post.html
+    detail.html
+
+## Mario Aparisi Castro:
+
+
+
+### Commits más relevantes:
+
+
+
+### Ficheros mas trabajados:
+
+
+
+## Izan González Cuevas
+
+Encargado de adaptar la página de nuevo elemento para actualizarla a los nuevos requerimientos: mostrar su vista, realizar validaciones en frontend, añadir funcionalidad al botón de guardar. Añadir funcionalidad backend al creado de la carta: guardado en el servidor, validación backend.
+
+### Commits más relevantes:
+
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/dcdf7eea5b014dd4f1d2914dcad98466a56ac4d0
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/55ef54b406549282de01fd2650dde4daf65c52cd
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a8ce7b88f2dd36bdb7f805bc6a6a87fa7bfd4657
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/91373d43de3209644e8ccceaddc4448ab94738a5
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/81bf243ccecbf8f13da5383230451ca62b57d08e
+
+### Ficheros mas trabajados:
+
+	create_new_card.html
+	router.js
+	index.html
+
+
+## Javier Rodríguez Gil:
+
+Hacer página de error y confirmación, además del trabajo en los respectivos archivos .js pra hacer funcionar ciertas partes.
+
+### Commits más relevantes:
+
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/22d1ec18bc9911632763c61b0b10dabc28d179be
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/c4b80095ae10b3cb9697068cba158848393bc51e
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a7fa8b42a1491dc432b99cda46d539586af1d6a4
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/14a0a4d9e73d42cc235ceae023c85be30ff66713
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a00caeb0dabd3a5b9ae0b1002afd18aab284b707
+
+### Ficheros mas trabajados:
+
+    router.js
+    confirmation.html
+    error.html
