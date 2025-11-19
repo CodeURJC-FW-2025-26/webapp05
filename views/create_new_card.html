@@ -21,8 +21,7 @@
                         <p class="section-subtitle">Fill out the form to create a new pokemon card</p>
                     </div>
                 </div>
-                <div class="form-main-border">
-                    <div class="form-main-body">
+                <div class="form-main-border"> <div class="form-main-body">
                         <div class="form-main-content">
                             <form role="form" action="/post/new" method="POST" enctype="multipart/form-data">
                                 <div class="row mb-3">
@@ -39,8 +38,8 @@
 
                                     <div class="col-12 col-md-6">
                                         <label for="price" class="form-label">Price</label>
-                                        <input type="number" id="price" name="precio" class="form-control"
-                                             placeholder="Price of the card" required>
+                                        <input type="number" id="price" name="precio" class="form-control" step="0.01"
+                                            min="0.01" placeholder="Price of the card" required>
                                     </div>
 
                                     <!-- Collection Form -->
@@ -86,16 +85,10 @@
                                             placeholder="Description of the pokemon card" required></textarea>
                                     </div>
 
-                                    <!-- Illustrator Form 
-
-                                    <div class="col-12">
-                                        <label for="illustrator" class="form-label">Illustrator</label>
-                                        <input type="text" id="illustrator" name="illustrator" class="form-control"
-                                            placeholder="Name of illustrator" required>
-                                    </div>
-                                    -->
                                 </div>
                                 <div class="row">
+
+                                    <!-- Save & Cancel buttons-->
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <a href="/" class="btn-view-details">Cancel</a>
@@ -106,12 +99,11 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
         </div>
 
         {{> footer}}
     </main>
-</body>
-
+    </body>
 </html>
