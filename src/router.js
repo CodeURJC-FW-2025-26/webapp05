@@ -466,20 +466,9 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
             // remove uploaded file if validation failed
             if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
 
-            // keep original date_added/illustrator if not provided to repopulate form
-            const postData = {
-                _id: id,
-                title,
-                precio,
-                coleccion,
-                release_date,
-                date_added: date_added || original.date_added,
-                description,
-                illustrator: illustrator || original.illustrator,
-                imageFilename: original.imageFilename
-            };
-
-            return res.status(400).render('edit_post', { post: postData, errors });
+            // aggregate message and render the generic error page (same UX as create)
+            const mensaje = errors.join('; ');
+            return res.status(400).render('error', { mensaje, returnUrl: `/editar/${id}` });
         }
 
         const updateData = {
