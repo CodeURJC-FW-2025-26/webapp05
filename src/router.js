@@ -57,6 +57,7 @@ router.get('/create_new_card.html', (req, res) => {
     return res.render('create_new_card');
 });
 
+// Get attributes from the form
 router.post('/post/new', upload.single('image'), async (req, res) => {
     try {
         const title = String(req.body.title || '').trim();
@@ -68,6 +69,8 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         const illustrator = String(req.body.illustrator || '').trim();
 
         const errors = [];
+
+        // --------------Validation-----------------
 
         // 1) None of the fields can be empty
         if (!title) errors.push('Title cannot be empty');
@@ -96,7 +99,7 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         if (errors.length > 0) {
             // remove uploaded file if validation failed
             if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
-            // render unified error page (project has error template)
+            // render error page
             const mensaje = errors.join('; ');
             return res.status(400).render('error', { mensaje, returnUrl: '/create_new_card.html' });
         }
