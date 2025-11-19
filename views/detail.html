@@ -28,12 +28,15 @@
                     <div class="card-title">{{post.title}}</div>
                     <div class="card-price">{{post.precio}}€</div>
                     {{#post.description}}
-                    <div class="card-description">{{post.description}}</div>
+                    <div class="card-description text-center">{{post.description}}</div>
                     {{/post.description}}
                     {{^post.description}}
-                    <div class="card-description">{{post.text}}</div>
+                    <div class="card-description text-center">{{post.text}}</div>
                     {{/post.description}}
-                    <div class="card-ilustrator">Illustrator: {{post.illustrator}}</div>
+                    {{#post.date_added}}
+                    <div class="card-date-added text-center">Date added: {{post.date_added}}</div>
+                    {{/post.date_added}}
+
                     <div class="card-collection">Collection: {{post.coleccion}}</div>
 
                     <div class="btn-detail">

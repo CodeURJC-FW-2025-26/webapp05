@@ -65,7 +65,8 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         const coleccion = String(req.body.coleccion || '').trim();
         const release_date = String(req.body.release_date || '').trim();
         // support both 'description' and legacy 'text' field names from the form
-        const description = String(req.body.description || req.body.text || '').trim();
+        const description = String(req.body.description || req.body.text || req.body.descripcion || '').trim();
+        // illustrator is optional in edit form (field removed); keep original if not provided
         const illustrator = String(req.body.illustrator || '').trim();
 
         const errors = [];
@@ -76,8 +77,16 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         if (!title) errors.push('Title cannot be empty');
         if (!precio) errors.push('Price cannot be empty');
         if (!coleccion) errors.push('Collection cannot be empty');
+        // date_added: accept if provided, otherwise default to today's date
+        let date_added = String(req.body.date_added || req.body.fecha_anadido || '').trim();
+
         if (!release_date) errors.push('Release date cannot be empty');
         if (!description) errors.push('Description cannot be empty');
+
+        if (!date_added) {
+            // set server-side default to today (YYYY-MM-DD)
+            date_added = new Date().toISOString().split('T')[0];
+        }
         if (!req.file) errors.push('Image file is required');
 
         // 2) Title must start with an uppercase letter (Unicode aware)
@@ -110,6 +119,7 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
             coleccion,
             release_date,
             description,
+            date_added,
             illustrator,
             imageFilename: req.file?.filename
         };
@@ -386,6 +396,17 @@ router.get('/editar/:id', async (req, res) => {
                 postData.release_date = `${yyyy}-${mm}-${dd}`;
             }
         }
+        // prepare date_added for edit form
+        postData.date_added = postData.date_added || postData.fecha_anadido || '';
+        if (postData.date_added) {
+            const d2 = new Date(postData.date_added);
+            if (!isNaN(d2.getTime())) {
+                const mm2 = String(d2.getMonth() + 1).padStart(2, '0');
+                const dd2 = String(d2.getDate()).padStart(2, '0');
+                const yyyy2 = d2.getFullYear();
+                postData.date_added = `${yyyy2}-${mm2}-${dd2}`;
+            }
+        }
 
 
         const col = String(postData.coleccion || '').toLowerCase();
@@ -416,16 +437,19 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
         const precio = String(req.body.precio || '').trim();
         const coleccion = String(req.body.coleccion || '').trim();
         const release_date = String(req.body.release_date || '').trim();
-        const description = String(req.body.description || req.body.text || '').trim();
+        const description = String(req.body.description || req.body.text || req.body.descripcion || '').trim();
         const illustrator = String(req.body.illustrator || '').trim();
 
         const errors = [];
         if (!title) errors.push('Title cannot be empty');
         if (!precio) errors.push('Price cannot be empty');
         if (!coleccion) errors.push('Collection cannot be empty');
+
+        // date_added is optional in edit form now; if not provided, use original's value later
+        const date_added = String(req.body.date_added || req.body.fecha_anadido || '').trim();
+
         if (!release_date) errors.push('Release date cannot be empty');
         if (!description) errors.push('Description cannot be empty');
-        if (!illustrator) errors.push('Illustrator cannot be empty');
 
         //Uppercase titles
         if (title && !/^[\p{Lu}]/u.test(title)) {
@@ -442,14 +466,16 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
             // remove uploaded file if validation failed
             if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
 
+            // keep original date_added/illustrator if not provided to repopulate form
             const postData = {
                 _id: id,
                 title,
                 precio,
                 coleccion,
                 release_date,
+                date_added: date_added || original.date_added,
                 description,
-                illustrator,
+                illustrator: illustrator || original.illustrator,
                 imageFilename: original.imageFilename
             };
 
@@ -461,8 +487,11 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
             precio,
             coleccion,
             release_date,
+            // if date_added not provided, preserve original
+            date_added: date_added || original.date_added,
+            // illustrator optional: preserve original if empty
+            illustrator: illustrator || original.illustrator,
             description,
-            illustrator,
             text: description
         };
 

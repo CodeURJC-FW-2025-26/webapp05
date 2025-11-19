@@ -3,144 +3,192 @@
         "coleccion": "151",
         "title": "Charizard",
         "precio": "45.99",
-        "imageFilename": "coleccion-151/charizard.png"
+        "imageFilename": "coleccion-151/charizard.png",
+        "description": "Carta poderosa con ataques de fuego.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Mew",
         "precio": "89.99",
-        "imageFilename": "coleccion-151/mew.png"
+        "imageFilename": "coleccion-151/mew.png",
+        "description": "Mew es una carta rara y versátil.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Black Bolt",
         "title": "Victini",
         "precio": "32.99",
-        "imageFilename": "coleccion-blackbolt/victini.png"
+        "imageFilename": "coleccion-blackbolt/victini.png",
+        "description": "Victini aporta energía extra a tu mazo.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Black Bolt",
         "title": "Zekrom",
         "precio": "67.99",
-        "imageFilename": "coleccion-blackbolt/zekrom.png"
+        "imageFilename": "coleccion-blackbolt/zekrom.png",
+        "description": "Zekrom con poderes eléctricos y gran ataque.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Legendary Treasures",
         "title": "Meloetta",
         "precio": "55.99",
-        "imageFilename": "coleccion-legendarytreasures/meloetta.jfif"
+        "imageFilename": "coleccion-legendarytreasures/meloetta.jfif",
+        "description": "Meloetta, carta de colección, melodías poderosas.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Legendary Treasures",
         "title": "Swablu",
         "precio": "12.99",
-        "imageFilename": "coleccion-legendarytreasures/swablu.jfif"
+        "imageFilename": "coleccion-legendarytreasures/swablu.jfif",
+        "description": "Swablu, una carta adorable y accesible.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Paradox Rift",
         "title": "Groudon",
         "precio": "78.99",
-        "imageFilename": "coleccion-paradoxrift/groudon.jfif"
+        "imageFilename": "coleccion-paradoxrift/groudon.jfif",
+        "description": "Groudon, legendaria y dominante en tierra.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Paradox Rift",
         "title": "Yveltal",
         "precio": "69.99",
-        "imageFilename": "coleccion-paradoxrift/yveltal.jfif"
+        "imageFilename": "coleccion-paradoxrift/yveltal.jfif",
+        "description": "Yveltal, fuerza oscura y control del rival.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Plasma Storm",
         "title": "Klinklang",
         "precio": "35.99",
-        "imageFilename": "coleccion-plasmastorm/klinklang.jfif"
+        "imageFilename": "coleccion-plasmastorm/klinklang.jfif",
+        "description": "Klinklang, máquina con engranajes únicos.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Plasma Storm",
         "title": "Zapdos",
         "precio": "52.99",
-        "imageFilename": "coleccion-plasmastorm/zapdos.jfif"
+        "imageFilename": "coleccion-plasmastorm/zapdos.jfif",
+        "description": "Zapdos eléctrico, gran potencial ofensivo.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Crown Zenith",
         "title": "Giratina",
         "precio": "95.99",
-        "imageFilename": "coleccion.crownzenit/giratina.jfif"
+        "imageFilename": "coleccion.crownzenit/giratina.jfif",
+        "description": "Giratina, custodio de dimensiones alternativas.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "Crown Zenith",
         "title": "Magmortar",
         "precio": "42.99",
-        "imageFilename": "coleccion.crownzenit/magmortar.jfif"
+        "imageFilename": "coleccion.crownzenit/magmortar.jfif",
+        "description": "Magmortar, especialista en ataques de fuego.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Alakazam",
         "precio": "6.99",
-        "imageFilename": "coleccion-151/alakazam.png"
+        "imageFilename": "coleccion-151/alakazam.png",
+        "description": "Alakazam, gran poder psíquico.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Arbok",
         "precio": "8.99",
-        "imageFilename": "coleccion-151/arbok.png"
+        "imageFilename": "coleccion-151/arbok.png",
+        "description": "Arbok, venenoso y con gran presencia.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Blastoise",
         "precio": "99.99",
-        "imageFilename": "coleccion-151/blastoise.png"
+        "imageFilename": "coleccion-151/blastoise.png",
+        "description": "Blastoise, tanque con poderosas defensas.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Bulbasur",
         "precio": "24.99",
-        "imageFilename": "coleccion-151/bulbasur.png"
+        "imageFilename": "coleccion-151/bulbasur.png",
+        "description": "Bulbasur, opción clásica y equilibrada.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Charmander",
         "precio": "39.99",
-        "imageFilename": "coleccion-151/charmander.png"
+        "imageFilename": "coleccion-151/charmander.png",
+        "description": "Charmander, fuego joven pero potente.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Dragonair",
         "precio": "15.99",
-        "imageFilename": "coleccion-151/dragonair.png"
+        "imageFilename": "coleccion-151/dragonair.png",
+        "description": "Dragonair, elegante y con potencial de evolución.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Golem",
         "precio": "2.99",
-        "imageFilename": "coleccion-151/golem.png"
+        "imageFilename": "coleccion-151/golem.png",
+        "description": "Golem, robusto pero sencillo.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Jynx",
         "precio": "4.99",
-        "imageFilename": "coleccion-151/jynx.png"
+        "imageFilename": "coleccion-151/jynx.png",
+        "description": "Jynx, carta con aspecto llamativo.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Ninetales",
         "precio": "9.99",
-        "imageFilename": "coleccion-151/ninetales.png"
+        "imageFilename": "coleccion-151/ninetales.png",
+        "description": "Ninetales, elegante y místico.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Squirtel",
         "precio": "19.99",
-        "imageFilename": "coleccion-151/squirtel.png"
+        "imageFilename": "coleccion-151/squirtel.png",
+        "description": "Squirtel, básico y fiable.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Venusaur",
         "precio": "89.99",
-        "imageFilename": "coleccion-151/venusaur.png"
+        "imageFilename": "coleccion-151/venusaur.png",
+        "description": "Venusaur, poderoso y estratégico.",
+        "date_added": "2025-11-19"
     },
     {
         "coleccion": "151",
         "title": "Zapdos",
         "precio": "79.99",
-        "imageFilename": "coleccion-151/zapdos.png"
+        "imageFilename": "coleccion-151/zapdos.png",
+        "description": "Zapdos clásico en versión de colección.",
+        "date_added": "2025-11-19"
     }
 ]

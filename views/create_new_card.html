@@ -21,7 +21,8 @@
                         <p class="section-subtitle">Fill out the form to create a new pokemon card</p>
                     </div>
                 </div>
-                <div class="form-main-border"> <div class="form-main-body">
+                <div class="form-main-border">
+                    <div class="form-main-body">
                         <div class="form-main-content">
                             <form role="form" action="/post/new" method="POST" enctype="multipart/form-data">
                                 <div class="row mb-3">
@@ -68,11 +69,13 @@
 
                                     <!-- Release Date Form -->
 
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <label for="release_date" class="form-label">Release date</label>
                                         <input type="date" id="release_date" name="release_date" class="form-control"
                                             required>
                                     </div>
+
+                                    <!-- Date Added removed: will be set automatically on create -->
                                 </div>
 
                                 <div class="row mb-3">
@@ -81,7 +84,7 @@
 
                                     <div class="col-12">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea id="description" name="text" class="form-control" rows="4"
+                                        <textarea id="description" name="description" class="form-control" rows="4"
                                             placeholder="Description of the pokemon card" required></textarea>
                                     </div>
 
@@ -99,11 +102,12 @@
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
         </div>
 
         {{> footer}}
     </main>
-    </body>
+</body>
+
 </html>
