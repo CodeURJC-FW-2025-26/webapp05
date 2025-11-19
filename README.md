@@ -164,15 +164,21 @@ Los ficheros pueden haber sido trabajados por todos o por uno o varios miembros.
 
 ## David Esteban Bernardo
 
+Encargado de implementar las rutas y la lógica de edición y borrado de la entidad principal: mostrar la página de detalle y el formulario de edición. También mostrar páginas de confirmación tras actualizar/borrar
 
 
 ### Commits más relevantes:
 
-
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/f053d05532bc0a519c8743cd81296fff8f19c765
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/02014165c8144dbe0ee82d7a53cf571870b48612
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/e9db18c31ffda45b3e2397e91924396dc5b55bae
 
 ### Ficheros mas trabajados:
 
-
+    router.js
+    board.js 
+    edit_post.html
+    detail.html
 
 ## Mario Aparisi Castro:
 
