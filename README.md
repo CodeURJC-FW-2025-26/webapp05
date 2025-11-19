@@ -207,12 +207,18 @@ Encargado de adaptar la página de nuevo elemento para actualizarla a los nuevos
 
 ## Javier Rodríguez Gil:
 
-
+Hacer página de error y confirmación, además del trabajo en los respectivos archivos .js pra hacer funcionar ciertas partes.
 
 ### Commits más relevantes:
 
-
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/22d1ec18bc9911632763c61b0b10dabc28d179be
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/c4b80095ae10b3cb9697068cba158848393bc51e
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a7fa8b42a1491dc432b99cda46d539586af1d6a4
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/14a0a4d9e73d42cc235ceae023c85be30ff66713
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a00caeb0dabd3a5b9ae0b1002afd18aab284b707
 
 ### Ficheros mas trabajados:
 
-
+    router.js
+    confirmation.html
+    error.html
