@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="/style/style.css" rel="stylesheet">
     <title>{{post.title}} - TCG DEVS</title>
@@ -71,6 +72,9 @@
                             </select>
 
                             <button type="submit" class="btn-view-details" id="button-create">Create</button>
+                            <div id="spinner" style="display: none; text-align: center; margin-top: 10px;">
+                                <img src="/uploads/loadingWheel.gif" alt="Loading..." style="width: 50px; height: 50px;">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -106,7 +110,7 @@
                     <button type="submit" class="btn-view-details">Delete</button>
                 </form>
 
-                <a href="/editar_secundario/{{_id}}" class="btn-view-details">Edit</a>
+                <button class="btn-view-details edit-btn" data-review-id="{{_id}}">Edit</button>
             </div>
             {{/reviews}}
 
@@ -117,6 +121,313 @@
             {{/reviews}}
         </div>
     </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="errorMessage">
+                    An error occurred.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector('.detail-form');
+        const spinner = document.getElementById('spinner');
+        const button = document.getElementById('button-create');
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+
+            // Get values
+            const nickname = document.getElementById('nickname').value.trim();
+            const date = document.getElementById('date').value.trim();
+            const text = document.getElementById('text').value.trim();
+            const rating = document.getElementById('rating').value.trim();
+
+            let hasError = false;
+
+            // Validate empty fields 
+
+            if (!nickname) {
+                showError('nickname', 'Nickname is required');
+                hasError = true;
+            }
+            if (!date) {
+                showError('date', 'Date is required');
+                hasError = true;
+            }
+            if (!text) {
+                showError('text', 'Opinion is required');
+                hasError = true;
+            }
+            if (!rating) {
+                showError('rating', 'Rating is required');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // Check duplicate nickname
+            const existingNicknames = Array.from(document.querySelectorAll('.review1 td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
+            if (existingNicknames.includes(nickname.toLowerCase())) {
+                showError('nickname', 'This nickname has already reviewed this card');
+                return;
+            }
+
+            // Show spinner
+            spinner.style.display = 'block';
+            button.disabled = true;
+
+            // Prepare data
+            const data = new URLSearchParams();
+            data.append('nickname', nickname);
+            data.append('date', date);
+            data.append('text', text);
+            data.append('rating', rating);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Clear form
+                    form.reset();
+                    // Add review to DOM tree
+                    addReviewToDOM(result.review);
+                } else {
+                    // Show error
+                    errorMessage.textContent = result.message;
+                    errorModal.show();
+                }
+            } catch (error) {
+                errorMessage.textContent = 'An unexpected error occurred';
+                errorModal.show();
+            } finally {
+                spinner.style.display = 'none';
+                button.disabled = false;
+            }
+        });
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message text-danger';
+            errorDiv.textContent = message;
+            field.parentNode.insertBefore(errorDiv, field.nextSibling);
+        }
+
+        function addReviewToDOM(review) {
+            const reviewsContainer = document.querySelector('.container-fluid .row');
+            const noReviews = reviewsContainer.querySelector('.col-12.text-center');
+            if (noReviews) {
+                noReviews.remove();
+            }
+
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'col-lg-6 col-md-12 col-xs-12 review1';
+            reviewDiv.innerHTML = `
+                <table>
+                    <tr>
+                        <td><strong>Nickname:</strong></td>
+                        <td>${review.nickname}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date:</strong></td>
+                        <td>${review.date}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Opinion:</strong></td>
+                        <td>${review.text}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rating:</strong></td>
+                        <td>${review.rating}★</td>
+                    </tr>
+                </table>
+                <form action="/post/${review.postId}/borrar_secundario/${review._id}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres borrar esta reseña?');">
+                    <button type="submit" class="btn-view-details">Delete</button>
+                </form>
+                <button class="btn-view-details edit-btn" data-review-id="${review._id}">Edit</button>
+            `;
+
+            reviewsContainer.appendChild(reviewDiv);
+        }
+
+        // Edit functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('edit-btn')) {
+                const reviewDiv = e.target.closest('.review1');
+                const reviewId = e.target.dataset.reviewId;
+                const table = reviewDiv.querySelector('table');
+                const originalHTML = table.outerHTML;
+                reviewDiv.dataset.originalTable = originalHTML;
+                reviewDiv.classList.add('editing');
+
+                // Get current values
+                const nickname = table.querySelector('tr:nth-child(1) td:nth-child(2)').textContent.trim();
+                const date = table.querySelector('tr:nth-child(2) td:nth-child(2)').textContent.trim();
+                const text = table.querySelector('tr:nth-child(3) td:nth-child(2)').textContent.trim();
+                const rating = table.querySelector('tr:nth-child(4) td:nth-child(2)').textContent.trim().replace('★', '');
+
+                // Replace review with form
+                table.outerHTML = `
+                    <form class="edit-form">
+                        <label><strong>Nickname:</strong></label>
+                        <input type="text" id="edit-nickname-${reviewId}" value="${nickname}" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                        <label><strong>Date:</strong></label>
+                        <input type="date" id="edit-date-${reviewId}" value="${date}" required>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                        <label><strong>Opinion:</strong></label>
+                        <textarea id="edit-text-${reviewId}" rows="4" required>${text}</textarea>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                        <label><strong>Rating:</strong></label>
+                        <select id="edit-rating-${reviewId}" required>
+                            <option value="" disabled>Select rating</option>
+                            <option value="1" ${rating === '1' ? 'selected' : ''}>1★</option>
+                            <option value="2" ${rating === '2' ? 'selected' : ''}>2★</option>
+                            <option value="3" ${rating === '3' ? 'selected' : ''}>3★</option>
+                            <option value="4" ${rating === '4' ? 'selected' : ''}>4★</option>
+                            <option value="5" ${rating === '5' ? 'selected' : ''}>5★</option>
+                        </select>
+                        <div class="error-message text-danger" style="display: none;"></div>
+                        <br>
+                        <button type="button" class="btn-view-details save-btn" data-review-id="${reviewId}">Save</button>
+                        <button type="button" class="btn-view-details cancel-btn">Cancel</button>
+                    </form>
+                `;
+            }
+
+            if (e.target.classList.contains('cancel-btn')) {
+                const reviewDiv = e.target.closest('.review1');
+                const form = reviewDiv.querySelector('.edit-form');
+                form.outerHTML = reviewDiv.dataset.originalTable;
+                reviewDiv.classList.remove('editing');
+            }
+
+            if (e.target.classList.contains('save-btn')) {
+                const reviewId = e.target.dataset.reviewId;
+                const reviewDiv = e.target.closest('.review1');
+                const form = reviewDiv.querySelector('.edit-form');
+
+                // Remove errors
+                form.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+                const nickname = document.getElementById(`edit-nickname-${reviewId}`).value.trim();
+                const date = document.getElementById(`edit-date-${reviewId}`).value.trim();
+                const text = document.getElementById(`edit-text-${reviewId}`).value.trim();
+                const rating = document.getElementById(`edit-rating-${reviewId}`).value.trim();
+
+                let hasError = false;
+
+                if (!nickname) {
+                    showErrorInForm(form, 'edit-nickname-' + reviewId, 'Nickname is required');
+                    hasError = true;
+                }
+                if (!date) {
+                    showErrorInForm(form, 'edit-date-' + reviewId, 'Date is required');
+                    hasError = true;
+                }
+                if (!text) {
+                    showErrorInForm(form, 'edit-text-' + reviewId, 'Opinion is required');
+                    hasError = true;
+                }
+                if (!rating) {
+                    showErrorInForm(form, 'edit-rating-' + reviewId, 'Rating is required');
+                    hasError = true;
+                }
+
+                if (hasError) return;
+
+                // Check for duplicated nicknames, except the current one's
+                const existingNicknames = Array.from(document.querySelectorAll('.review1:not(.editing) td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
+                if (existingNicknames.includes(nickname.toLowerCase())) {
+                    showErrorInForm(form, 'edit-nickname-' + reviewId, 'This nickname has already reviewed this card');
+                    return;
+                }
+
+                // AJAX submit
+                const data = new URLSearchParams();
+                data.append('nickname', nickname);
+                data.append('date', date);
+                data.append('text', text);
+                data.append('rating', rating);
+
+                fetch(`/actualizar_secundario/${reviewId}`, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Update the table
+                        form.outerHTML = `
+                            <table>
+                                <tr>
+                                    <td><strong>Nickname:</strong></td>
+                                    <td>${result.review.nickname}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Date:</strong></td>
+                                    <td>${result.review.date}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Opinion:</strong></td>
+                                    <td>${result.review.text}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rating:</strong></td>
+                                    <td>${result.review.rating}★</td>
+                                </tr>
+                            </table>
+                        `;
+                        reviewDiv.classList.remove('editing');
+                    } else {
+                        errorMessage.textContent = result.message;
+                        errorModal.show();
+                    }
+                })
+                .catch(error => {
+                    errorMessage.textContent = 'An unexpected error occurred';
+                    errorModal.show();
+                });
+            }
+        });
+
+        function showErrorInForm(form, fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = field.nextElementSibling;
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+    </script>
 
     {{> footer}}
 </body>

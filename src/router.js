@@ -236,7 +236,21 @@ router.post('/post/:id/crear_secundario', async (req, res) => {
             rating: req.body.rating
         };
 
-        await board.addReview(review);
+        const result = await board.addReview(review);
+        const insertedId = result.insertedId.toString();
+
+        const newReview = {
+            _id: insertedId,
+            postId: postId,
+            nickname: review.nickname,
+            date: review.date,
+            text: review.text,
+            rating: review.rating
+        };
+
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.json({ success: true, review: newReview });
+        }
 
         res.render('confirmation', {
             message: 'Reseña creada con éxito',
@@ -245,6 +259,9 @@ router.post('/post/:id/crear_secundario', async (req, res) => {
 
     } catch (error) {
         console.error(error);
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.status(400).json({ success: false, message: error.message });
+        }
         res.redirect(`/error?mensaje=${encodeURIComponent(error.message)}&returnUrl=/post/${postId}`);
     }
 });
@@ -299,6 +316,9 @@ router.post('/actualizar_secundario/:id', async (req, res) => {
 
         const originalReview = await board.getReview(reviewId);
         if (!originalReview) {
+            if (req.headers.accept && req.headers.accept.includes('application/json')) {
+                return res.status(404).json({ success: false, message: 'Reseña no encontrada' });
+            }
             return res.redirect('/error?mensaje=Reseña%20no%20encontrada');
         }
         postId = originalReview.postId.toString();
@@ -312,6 +332,19 @@ router.post('/actualizar_secundario/:id', async (req, res) => {
 
         await board.updateReview(reviewId, reviewData);
 
+        const updatedReview = {
+            _id: reviewId,
+            postId: postId,
+            nickname: reviewData.nickname,
+            date: reviewData.date,
+            text: reviewData.text,
+            rating: reviewData.rating
+        };
+
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.json({ success: true, review: updatedReview });
+        }
+
         res.render('confirmation', {
             message: 'Reseña actualizada con éxito',
             returnUrl: `/post/${postId}`
@@ -319,6 +352,9 @@ router.post('/actualizar_secundario/:id', async (req, res) => {
 
     } catch (error) {
         console.error(error);
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.status(400).json({ success: false, message: error.message });
+        }
         const returnUrl = postId ? `/post/${postId}` : '/';
         res.redirect(`/error?mensaje=${encodeURIComponent(error.message)}&returnUrl=${returnUrl}`);
     }
