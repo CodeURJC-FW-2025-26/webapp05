@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="reviews-container">
         <div class="row">
             {{#reviews}}
             <div class="col-lg-6 col-md-12 col-xs-12 review1">
@@ -240,7 +240,7 @@
         }
 
         function addReviewToDOM(review) {
-            const reviewsContainer = document.querySelector('.container-fluid .row');
+            const reviewsContainer = document.querySelector('#reviews-container .row');
             const noReviews = reviewsContainer.querySelector('.col-12.text-center');
             if (noReviews) {
                 noReviews.remove();
