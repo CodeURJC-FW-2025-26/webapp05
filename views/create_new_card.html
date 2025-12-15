@@ -24,7 +24,8 @@
                 <div class="form-main-border">
                     <div class="form-main-body">
                         <div class="form-main-content">
-                            <form role="form" action="/post/new" method="POST" enctype="multipart/form-data">
+                            <form id="create-card-form" role="form" action="/post/new" method="POST"
+                                enctype="multipart/form-data">
                                 <div class="row mb-3">
 
                                     <div class="col-12">
@@ -59,17 +60,29 @@
                                 </div>
                                 <div class="row mb-3">
 
-                                    <!-- Image Form -->
-
+                                    <!-- Image Form with Drag & Drop -->
                                     <div class="col-12">
                                         <label for="image" class="form-label">Image</label>
+                                        <div id="image-drop-zone" class="image-drop-zone">
+                                            <div class="drop-zone-text">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Arrastra una imagen aquí o haz clic para seleccionar</p>
+                                                <small class="text-muted">Formatos: JPG, PNG, GIF, WebP</small>
+                                            </div>
+                                            <div id="image-preview-container" class="image-preview-container">
+                                                <img id="image-preview" src="" alt="Preview">
+                                                <button type="button" id="remove-image-btn" class="remove-image-btn">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                         <input class="form-control" type="file" id="image" name="image" accept="image/*"
-                                            required>
+                                            style="display: none;" required>
                                     </div>
 
                                     <!-- Release Date Form -->
 
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-6 mt-3">
                                         <label for="release_date" class="form-label">Release date</label>
                                         <input type="date" id="release_date" name="release_date" class="form-control"
                                             required>
@@ -95,8 +108,24 @@
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <a href="/" class="btn-view-details">Cancel</a>
-                                        <button type="submit" class="btn-view-details">Save</button>
+                                        <button type="submit" id="submit-btn" class="btn-view-details">Save</button>
                                     </div>
+                                </div>
+
+                                <!-- Loading Spinner -->
+                                <div id="form-spinner" class="form-spinner">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Guardando carta...</p>
+                                </div>
+
+                                <!-- Success Message Container -->
+                                <div id="success-message" class="form-success-message" style="display: none;">
+                                    <h4><i class="fas fa-check-circle"></i> ¡Carta creada con éxito!</h4>
+                                    <p>Tu nueva carta Pokémon ha sido añadida.</p>
+                                    <a id="view-card-link" href="/" class="btn-view-details"
+                                        style="display: inline-block; margin-top: 10px;">Ver carta</a>
                                 </div>
                             </form>
                         </div>
@@ -104,10 +133,12 @@
                 </div>
             </div>
         </div>
-        </div>
 
         {{> footer}}
     </main>
+
+    <script src="/js/image-upload.js"></script>
+    <script src="/js/create-card-form.js"></script>
 </body>
 
 </html>

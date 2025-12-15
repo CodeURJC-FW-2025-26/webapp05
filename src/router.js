@@ -105,9 +105,15 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
             errors.push('Price must be a valid positive number greater than zero');
         }
 
+        const isJsonRequest = req.headers.accept && req.headers.accept.includes('application/json');
+
         if (errors.length > 0) {
             // remove uploaded file if validation failed
             if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
+
+            if (isJsonRequest) {
+                return res.status(400).json({ success: false, errors, message: errors.join('; ') });
+            }
             // render error page
             const mensaje = errors.join('; ');
             return res.status(400).render('error', { mensaje, returnUrl: '/create_new_card.html' });
@@ -127,16 +133,30 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
         const result = await board.addPost(post);
         const insertedId = result.insertedId?.toString();
 
+        if (isJsonRequest) {
+            return res.json({
+                success: true,
+                message: 'Card created successfully.',
+                postId: insertedId,
+                createdPostUrl: `/post/${insertedId}`
+            });
+        }
+
         // render confirmation page (project uses confirmation.html)
         return res.render('confirmation', {
             message: 'Card created successfully.',
             returnUrl: `/post/${insertedId}`,
-            createdPostUrl: `/post/${insertedId}` // Modified line
+            createdPostUrl: `/post/${insertedId}`
         });
 
     } catch (error) {
         console.error(error);
         if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
+
+        const isJsonRequest = req.headers.accept && req.headers.accept.includes('application/json');
+        if (isJsonRequest) {
+            return res.status(500).json({ success: false, message: 'Internal server error' });
+        }
         return res.redirect(`/error?mensaje=${encodeURIComponent('Internal server error')}`);
     }
 });
@@ -453,6 +473,9 @@ router.get('/editar/:id', async (req, res) => {
         postData.isParadox = /paradox/.test(col) || /paradoxrift/.test(col);
         postData.isCrown = /crown/.test(col) || /zenith/.test(col);
 
+        // Flag for existing image
+        postData.hasImage = !!postData.imageFilename;
+
         res.render('edit_post', { post: postData });
     } catch (error) {
         console.error(error);
@@ -463,11 +486,23 @@ router.get('/editar/:id', async (req, res) => {
 
 router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
     const id = req.params.id;
+    const isJsonRequest = req.headers.accept && req.headers.accept.includes('application/json');
+
     try {
-        if (!ObjectId.isValid(id)) return res.redirect('/error?mensaje=Id%20no%20válido');
+        if (!ObjectId.isValid(id)) {
+            if (isJsonRequest) {
+                return res.status(400).json({ success: false, message: 'Id no válido' });
+            }
+            return res.redirect('/error?mensaje=Id%20no%20válido');
+        }
 
         const original = await board.getPost(id);
-        if (!original) return res.redirect('/error?mensaje=Carta%20no%20encontrada');
+        if (!original) {
+            if (isJsonRequest) {
+                return res.status(404).json({ success: false, message: 'Carta no encontrada' });
+            }
+            return res.redirect('/error?mensaje=Carta%20no%20encontrada');
+        }
 
         const title = String(req.body.title || '').trim();
         const precio = String(req.body.precio || '').trim();
@@ -475,6 +510,7 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
         const release_date = String(req.body.release_date || '').trim();
         const description = String(req.body.description || req.body.text || req.body.descripcion || '').trim();
         const illustrator = String(req.body.illustrator || '').trim();
+        const removeImage = String(req.body.removeImage || '').trim();
 
         const errors = [];
         if (!title) errors.push('Title cannot be empty');
@@ -502,6 +538,9 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
             // remove uploaded file if validation failed
             if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
 
+            if (isJsonRequest) {
+                return res.status(400).json({ success: false, errors, message: errors.join('; ') });
+            }
             // aggregate message and render the generic error page (same UX as create)
             const mensaje = errors.join('; ');
             return res.status(400).render('error', { mensaje, returnUrl: `/editar/${id}` });
@@ -521,7 +560,14 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
         };
 
         if (req.file) {
+            // New image uploaded - replace old one
             updateData.imageFilename = req.file.filename;
+            if (original.imageFilename) {
+                await fs.rm(board.UPLOADS_FOLDER + '/' + original.imageFilename).catch(() => { });
+            }
+        } else if (removeImage === 'true') {
+            // User wants to remove the image without replacement
+            updateData.imageFilename = null;
             if (original.imageFilename) {
                 await fs.rm(board.UPLOADS_FOLDER + '/' + original.imageFilename).catch(() => { });
             }
@@ -529,11 +575,23 @@ router.post('/actualizar/:id', upload.single('image'), async (req, res) => {
 
         await board.updatePost(id, updateData);
 
+        if (isJsonRequest) {
+            return res.json({
+                success: true,
+                message: 'Card updated successfully.',
+                postId: id
+            });
+        }
+
         return res.redirect(`/actualizado_exito?id=${id}`);
 
     } catch (error) {
         console.error(error);
         if (req.file) await fs.rm(board.UPLOADS_FOLDER + '/' + req.file.filename).catch(() => { });
+
+        if (isJsonRequest) {
+            return res.status(500).json({ success: false, message: 'Error al actualizar la carta: ' + error.message });
+        }
         return res.redirect(`/error?mensaje=${encodeURIComponent('Error al actualizar la carta: ' + error.message)}`);
     }
 });

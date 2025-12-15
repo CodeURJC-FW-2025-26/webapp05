@@ -611,3 +611,153 @@ th {
 /* ===============================
         END DETAIL PAGE
    =============================== */
+
+/* ===============================
+   IMAGE UPLOAD COMPONENTS
+   =============================== */
+
+/* Drop Zone */
+.image-drop-zone {
+    border: 3px dashed #ccc;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.5);
+    position: relative;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-drop-zone:hover {
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.05);
+}
+
+.image-drop-zone.drag-over {
+    border-color: #4ECDC4;
+    background: rgba(78, 205, 196, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+.image-drop-zone.has-preview {
+    border-style: solid;
+    border-color: #4ECDC4;
+}
+
+.drop-zone-text {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.drop-zone-text i {
+    font-size: 2.5rem;
+    color: #bdc3c7;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.drop-zone-text.hidden {
+    display: none;
+}
+
+.drop-zone-error {
+    margin-top: 10px;
+    font-size: 0.875rem;
+}
+
+/* Image Preview Container */
+.image-preview-container {
+    display: none;
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    object-fit: contain;
+}
+
+/* Remove Image Button */
+.remove-image-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ff6b6b;
+    color: white;
+    border: 3px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.remove-image-btn:hover {
+    background: #ff5252;
+    transform: scale(1.1);
+}
+
+/* Form Error Container */
+.form-error-container {
+    display: none;
+}
+
+/* Field Error */
+.field-error {
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Loading Spinner */
+.form-spinner {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.form-spinner img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Success Message */
+.form-success-message {
+    background: linear-gradient(135deg, #4ECDC4 0%, #44a08d 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.form-success-message h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.form-success-message a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* ===============================
+   END IMAGE UPLOAD COMPONENTS
+   =============================== */

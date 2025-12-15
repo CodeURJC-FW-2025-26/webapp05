@@ -10,6 +10,8 @@ const app = express();
 app.use(express.static('./public'));
 // Serve uploaded images so templates can reference /uploads/<path>
 app.use('/uploads', express.static('./uploads'));
+// Serve JavaScript files from src folder
+app.use('/js', express.static('./src', { extensions: ['js'] }));
 
 app.set('view engine', 'html');
 app.engine('html', mustacheExpress(), ".html");
