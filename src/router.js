@@ -683,3 +683,20 @@ router.get('/actualizado_exito', (req, res) => {
         returnUrl: returnUrl
     });
 });
+
+// AJAX validation: check if title is unique 
+router.get('/api/validate/title', async (req, res) => {
+    try {
+        const rawTitle = String(req.query.title || '').trim();
+        if (!rawTitle) {
+            return res.status(400).json({ ok: false, message: 'Title is required', available: false });
+        }
+
+        const existing = await board.getPostByTitle(rawTitle);
+        const available = !existing;
+        return res.json({ ok: true, available });
+    } catch (err) {
+        console.error('Error in /api/validate/title:', err);
+        return res.status(500).json({ ok: false, message: 'Server error', available: false });
+    }
+});

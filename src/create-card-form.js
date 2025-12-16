@@ -21,6 +21,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!form) return;
 
+    // AJAX check for duplicate title 
+    const titleInput = document.getElementById('pokemon_name');
+    let lastTitleChecked = '';
+    let titleAvailable = true;
+    if (titleInput) {
+        titleInput.addEventListener('blur', async function () {
+            const title = this.value.trim();
+            if (!title) return;
+            if (title === lastTitleChecked) return;
+            lastTitleChecked = title;
+            try {
+                const r = await fetch(`/api/validate/title?title=${encodeURIComponent(title)}`);
+                const data = await r.json();
+                titleAvailable = !!data.available;
+                if (!titleAvailable) {
+                    showFieldError('pokemon_name', 'El título ya existe (debe ser único)');
+                }
+            } catch (err) {
+
+            }
+        });
+    }
+
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -45,6 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (!/^[\p{Lu}]/u.test(title)) {
             showFieldError('pokemon_name', 'El nombre debe empezar con mayúscula');
             hasErrors = true;
+        } else {
+            // Check uniqueness before submit
+            try {
+                const r = await fetch(`/api/validate/title?title=${encodeURIComponent(title)}`);
+                const data = await r.json();
+                if (!data.available) {
+                    showFieldError('pokemon_name', 'El título ya existe (debe ser único)');
+                    hasErrors = true;
+                }
+            } catch (err) {
+                // If server error, do not block submit here; backend will validate too
+            }
         }
 
         if (!precio) {
@@ -120,10 +155,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function showFieldError(fieldId, message) {
         const field = document.getElementById(fieldId);
         if (!field) return;
+        field.classList.add('is-invalid');
+        const existing = field.parentNode.querySelector('.invalid-feedback');
+        if (existing) existing.remove();
         const errorDiv = document.createElement('div');
-        errorDiv.className = 'field-error text-danger small mt-1';
+        errorDiv.className = 'invalid-feedback d-block';
         errorDiv.textContent = message;
-        field.parentNode.insertBefore(errorDiv, field.nextSibling);
+        field.parentNode.appendChild(errorDiv);
     }
 
     function showDropZoneError(message) {
