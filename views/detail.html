@@ -42,8 +42,7 @@
 
                     <div class="btn-detail">
                         <a href="/editar/{{post._id}}" class="btn-view-details">Edit</a>
-                        <a href="/post/{{post._id}}/delete" class="btn-view-details"
-                            onclick="return confirm('¿Estás seguro de que quieres borrar esta carta?');">Delete</a>
+                        <button class="btn-view-details btn-delete-post" data-post-id="{{post._id}}">Delete</button>
                         <a href="/" class="btn-view-details">Return to main page</a>
                     </div>
                 </div>
@@ -70,10 +69,11 @@
                                 <option value="4">4★</option>
                                 <option value="5">5★</option>
                             </select>
-                                <!-- "Required" are removed to show bootstrap modal errors (the red text)-->
+                            <!-- "Required" are removed to show bootstrap modal errors (the red text)-->
                             <button type="submit" class="btn-view-details" id="button-create">Create</button>
                             <div id="spinner" style="display: none; text-align: center; margin-top: 10px;">
-                                <img src="/uploads/loadingWheel.gif" alt="Loading..." style="width: 50px; height: 50px;">
+                                <img src="/uploads/loadingWheel.gif" alt="Loading..."
+                                    style="width: 50px; height: 50px;">
                             </div>
                         </form>
                     </div>
@@ -82,10 +82,10 @@
         </div>
     </div>
 
-    <div class="container-fluid" id="reviews-container">
+    <div class="container-fluid reviews-container" id="reviews-container">
         <div class="row">
             {{#reviews}}
-            <div class="col-lg-6 col-md-12 col-xs-12 review1">
+            <div class="col-lg-6 col-md-12 col-xs-12 review1 review-item">
                 <table>
                     <tr>
                         <td><strong>Nickname:</strong></td>
@@ -105,11 +105,8 @@
                     </tr>
                 </table>
 
-                <form action="/post/{{postId}}/borrar_secundario/{{_id}}" method="POST" style="display: inline;"
-                    onsubmit="return confirm('¿Estás seguro de que quieres borrar esta reseña?');">
-                    <button type="submit" class="btn-view-details">Delete</button>
-                </form>
-
+                <button class="btn-view-details btn-delete-review" data-review-id="{{_id}}"
+                    type="button">Delete</button>
                 <button class="btn-view-details edit-btn" data-review-id="{{_id}}">Edit</button>
             </div>
             {{/reviews}}
@@ -162,7 +159,7 @@
             let hasError = false;
 
             // Validate empty fields 
-                
+
             if (!nickname) {
                 showError('nickname', 'Nickname is required');
                 hasError = true;
@@ -181,7 +178,7 @@
             }
 
             if (hasError) return;
-                
+
             // Check duplicate nickname
             const existingNicknames = Array.from(document.querySelectorAll('.review1 td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
             if (existingNicknames.includes(nickname.toLowerCase())) {
@@ -397,11 +394,11 @@
                         'Accept': 'application/json'
                     }
                 })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success) {
-                        // Update the table
-                        form.outerHTML = `
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Update the table
+                            form.outerHTML = `
                             <table>
                                 <tr>
                                     <td><strong>Nickname:</strong></td>
@@ -421,16 +418,16 @@
                                 </tr>
                             </table>
                         `;
-                        reviewDiv.classList.remove('editing');
-                    } else {
-                        errorMessage.textContent = result.message;
+                            reviewDiv.classList.remove('editing');
+                        } else {
+                            errorMessage.textContent = result.message;
+                            errorModal.show();
+                        }
+                    })
+                    .catch(error => {
+                        errorMessage.textContent = 'An unexpected error occurred';
                         errorModal.show();
-                    }
-                })
-                .catch(error => {
-                    errorMessage.textContent = 'An unexpected error occurred';
-                    errorModal.show();
-                });
+                    });
             }
         });
 
@@ -440,6 +437,25 @@
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
         }
+    </script>
+
+    <!-- Delete Handler Module -->
+    <script type="module">
+        import { DeleteHandler } from '/js/delete-handler.js';
+        import { ReviewDeleteHandler } from '/js/review-delete-handler.js';
+
+        // Initialize post delete handler
+        new DeleteHandler({
+            deleteButtonSelector: '.btn-delete-post',
+            postId: '{{post._id}}',
+            redirectUrl: '/'
+        });
+
+        // Initialize review delete handler
+        new ReviewDeleteHandler({
+            deleteButtonSelector: '.btn-delete-review',
+            reviewContainerSelector: '.review-item'
+        });
     </script>
 
     {{> footer}}

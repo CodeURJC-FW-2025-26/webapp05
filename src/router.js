@@ -241,6 +241,36 @@ router.get('/detalle/:id', async (req, res) => {
     }
 });
 
+// API endpoint for deleting a post (returns JSON)
+router.delete('/api/posts/:id', async (req, res) => {
+    try {
+        const post = await board.deletePost(req.params.id);
+
+        // Delete image file if it exists
+        if (post && post.imageFilename) {
+            try {
+                await fs.rm(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+            } catch (err) {
+                console.error('Error deleting image file:', err);
+                // Continue even if file deletion fails
+            }
+        }
+
+        res.json({
+            success: true,
+            message: 'Post deleted successfully',
+            id: req.params.id
+        });
+    } catch (error) {
+        console.error('Error in DELETE /api/posts/:id:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error deleting post',
+            message: error.message
+        });
+    }
+});
+
 router.get('/post/:id/delete', async (req, res) => {
     try {
         let post = await board.deletePost(req.params.id);
@@ -311,6 +341,26 @@ router.post('/post/:id/crear_secundario', async (req, res) => {
             return res.status(400).json({ success: false, message: error.message });
         }
         res.redirect(`/error?mensaje=${encodeURIComponent(error.message)}&returnUrl=/post/${postId}`);
+    }
+});
+
+// API endpoint for deleting a review (returns JSON)
+router.delete('/api/reviews/:id', async (req, res) => {
+    try {
+        const review = await board.deleteReview(req.params.id);
+
+        res.json({
+            success: true,
+            message: 'Review deleted successfully',
+            id: req.params.id
+        });
+    } catch (error) {
+        console.error('Error in DELETE /api/reviews/:id:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Error deleting review',
+            message: error.message
+        });
     }
 });
 
