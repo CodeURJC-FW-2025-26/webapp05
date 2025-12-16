@@ -92,10 +92,28 @@ export async function getPostByTitle(title) {
 }
 
 // Review and validation.
+
 export async function addReview(review) {
+
+        let missingFields = ["","",""];
+
+        if (!review.nickname) {
+            missingFields.push("nickname");
+        }
+
+        if (!review.text) {
+            missingFields.push("opinión");
+        }
+        if (!review.rating) {
+            missingFields.push("valoración");
+        }
+        if (!review.date) {
+            missingFields.push("fecha");
+        }
+
     if (!review.nickname || !review.text || !review.rating || !review.postId) {
-        throw new Error('Faltan campos obligatorios en la reseña');
-    }
+        throw new Error('Faltan los siguientes campos obligatorios: ' + missingFields.filter(f => f !== "").join(", ")+'.');
+    } 
 
     const existingReview = await reviews.findOne({
         postId: review.postId,
@@ -156,7 +174,7 @@ export async function updateReview(reviewId, reviewData) {
     );
 }
 
-// Update a post document 
+// Update post 
 export async function updatePost(id, postData) {
     return await posts.updateOne({ _id: new ObjectId(id) }, { $set: postData });
 }

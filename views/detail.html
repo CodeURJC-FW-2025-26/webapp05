@@ -62,7 +62,7 @@
                             <textarea id="text" name="text" placeholder="Write review" rows="4"></textarea>
 
                             <label for="rating"><em>Rating</em></label>
-                            <select id="rating" name="rating" required>
+                            <select id="rating" name="rating">
                                 <option value="" disabled selected>Select rating</option>
                                 <option value="1">1★</option>
                                 <option value="2">2★</option>
@@ -70,7 +70,7 @@
                                 <option value="4">4★</option>
                                 <option value="5">5★</option>
                             </select>
-
+                                <!-- "Required" are removed to show bootstrap modal errors (the red text)-->
                             <button type="submit" class="btn-view-details" id="button-create">Create</button>
                             <div id="spinner" style="display: none; text-align: center; margin-top: 10px;">
                                 <img src="/uploads/loadingWheel.gif" alt="Loading..." style="width: 50px; height: 50px;">
@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <!-- Error Modal -->
+    <!-- Error Bootstrap -->
     <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -162,7 +162,7 @@
             let hasError = false;
 
             // Validate empty fields 
-
+                
             if (!nickname) {
                 showError('nickname', 'Nickname is required');
                 hasError = true;
@@ -181,7 +181,7 @@
             }
 
             if (hasError) return;
-
+                
             // Check duplicate nickname
             const existingNicknames = Array.from(document.querySelectorAll('.review1 td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
             if (existingNicknames.includes(nickname.toLowerCase())) {
