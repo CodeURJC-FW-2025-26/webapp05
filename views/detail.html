@@ -295,32 +295,42 @@
                 const text = table.querySelector('tr:nth-child(3) td:nth-child(2)').textContent.trim();
                 const rating = table.querySelector('tr:nth-child(4) td:nth-child(2)').textContent.trim().replace('★', '');
 
-                // Replace review with form
+                // Seamless review transform into form
                 table.outerHTML = `
-                    <form class="edit-form">
-                        <label><strong>Nickname:</strong></label>
-                        <input type="text" id="edit-nickname-${reviewId}" value="${nickname}" required>
-                        <div class="error-message text-danger" style="display: none;"></div>
-                        <label><strong>Date:</strong></label>
-                        <input type="date" id="edit-date-${reviewId}" value="${date}" required>
-                        <div class="error-message text-danger" style="display: none;"></div>
-                        <label><strong>Opinion:</strong></label>
-                        <textarea id="edit-text-${reviewId}" rows="4" required>${text}</textarea>
-                        <div class="error-message text-danger" style="display: none;"></div>
-                        <label><strong>Rating:</strong></label>
-                        <select id="edit-rating-${reviewId}" required>
-                            <option value="" disabled>Select rating</option>
-                            <option value="1" ${rating === '1' ? 'selected' : ''}>1★</option>
-                            <option value="2" ${rating === '2' ? 'selected' : ''}>2★</option>
-                            <option value="3" ${rating === '3' ? 'selected' : ''}>3★</option>
-                            <option value="4" ${rating === '4' ? 'selected' : ''}>4★</option>
-                            <option value="5" ${rating === '5' ? 'selected' : ''}>5★</option>
-                        </select>
-                        <div class="error-message text-danger" style="display: none;"></div>
-                        <br>
-                        <button type="button" class="btn-view-details save-btn" data-review-id="${reviewId}">Save</button>
-                        <button type="button" class="btn-view-details cancel-btn">Cancel</button>
-                    </form>
+                    <table class="edit-form">
+                        <tr>
+                            <td><strong>Nickname:</strong></td>
+                            <td><input type="text" id="edit-nickname-${reviewId}" value="${nickname}" required><div class="error-message text-danger" style="display: none;"></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date:</strong></td>
+                            <td><input type="date" id="edit-date-${reviewId}" value="${date}" required><div class="error-message text-danger" style="display: none;"></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opinion:</strong></td>
+                            <td><textarea id="edit-text-${reviewId}" rows="4" required>${text}</textarea><div class="error-message text-danger" style="display: none;"></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rating:</strong></td>
+                            <td>
+                                <select id="edit-rating-${reviewId}" required>
+                                    <option value="" disabled>Select rating</option>
+                                    <option value="1" ${rating === '1' ? 'selected' : ''}>1★</option>
+                                    <option value="2" ${rating === '2' ? 'selected' : ''}>2★</option>
+                                    <option value="3" ${rating === '3' ? 'selected' : ''}>3★</option>
+                                    <option value="4" ${rating === '4' ? 'selected' : ''}>4★</option>
+                                    <option value="5" ${rating === '5' ? 'selected' : ''}>5★</option>
+                                </select>
+                                <div class="error-message text-danger" style="display: none;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="button" class="btn-view-details save-btn" data-review-id="${reviewId}">Save</button>
+                                <button type="button" class="btn-view-details cancel-btn">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
                 `;
             }
 
