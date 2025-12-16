@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Module Test</title>
+</head>
+
+<body>
+    <h1>Module Load Test</h1>
+    <pre id="result">Testing...</pre>
+
+    <script type="module">
+        try {
+            console.log('Starting module test');
+            const { InfiniteScroll } = await import('/js/infinite-scroll.js');
+            console.log('Module loaded successfully');
+            document.getElementById('result').textContent = 'SUCCESS: Module loaded!\n\nClass: ' + InfiniteScroll.name;
+        } catch (err) {
+            console.error('Error loading module:', err);
+            document.getElementById('result').textContent = 'ERROR: ' + err.message + '\n\nStack:\n' + err.stack;
+        }
+    </script>
+</body>
+
+</html>

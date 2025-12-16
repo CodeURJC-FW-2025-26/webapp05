@@ -57,7 +57,7 @@
             </div>
 
             <!-- Card Grid (rendered from DB posts) -->
-            <div class="row cards-grid">
+            <div class="row cards-grid" data-current-page="{{currentPage}}" data-total-pages="{{totalPages}}">
                 {{#posts}}
                 <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
                     <div class="pokemon-card">
@@ -76,31 +76,13 @@
                 </div>
                 {{/posts}}
             </div>
-            <!-- Pagination -->
-            <div class="row mt-4">
-                <div class="col-12 d-flex justify-content-center">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li class="page-item {{^hasPrev}}disabled{{/hasPrev}}">
-                                <a class="page-link"
-                                    href="{{#hasPrev}}/?page={{prevPage}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}{{/hasPrev}}{{^hasPrev}}#{{/hasPrev}}">Prev</a>
-                            </li>
 
-                            {{#pages}}
-                            <li class="page-item {{#current}}active{{/current}}">
-                                <a class="page-link"
-                                    href="/?page={{num}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}"
-                                    {{#current}}aria-current="page" {{/current}}>{{num}}</a>
-                            </li>
-                            {{/pages}}
-
-                            <li class="page-item {{^hasNext}}disabled{{/hasNext}}">
-                                <a class="page-link"
-                                    href="{{#hasNext}}/?page={{nextPage}}{{#q}}&q={{q}}{{/q}}{{#collection}}&collection={{collection}}{{/collection}}{{#price}}&price={{value}}{{/price}}{{/hasNext}}{{^hasNext}}#{{/hasNext}}">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="text-center my-5" style="display: none;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
+                <p class="mt-2">Loading more cards...</p>
             </div>
 
             <a href="/create_new_card.html" class="btn-view-addCards">Add Cards</a>
@@ -108,6 +90,21 @@
     </main>
 
     {{> footer}}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Infinite Scroll Module -->
+    <script type="module">
+        import { InfiniteScroll } from '/js/infinite-scroll.js';
+
+        // Initialize immediately
+        new InfiniteScroll({
+            gridSelector: '.cards-grid',
+            loadingSelector: '#loading-indicator',
+            threshold: 300
+        });
+    </script>
 
 </body>
 

@@ -10,6 +10,34 @@ export default router;
 
 const upload = multer({ dest: board.UPLOADS_FOLDER })
 
+// API endpoint for infinite scroll (returns JSON)
+router.get('/api/posts', async (req, res) => {
+    try {
+        const perPage = 6;
+        const page = parseInt(req.query.page) || 1;
+        const q = req.query.q || '';
+        const collection = req.query.collection || '';
+        const rawPrice = req.query.price || '';
+
+        const { items, total } = await board.getPostsPaginated(page, perPage, q, collection, rawPrice);
+
+        // convert ObjectId to string so templates can use _id in URLs
+        const posts = (items || []).map(p => ({ ...p, _id: p._id.toString() }));
+
+        const totalPages = Math.ceil(total / perPage);
+
+        res.json({
+            posts,
+            page,
+            totalPages,
+            hasMore: page < totalPages
+        });
+    } catch (error) {
+        console.error('Error in /api/posts:', error);
+        res.status(500).json({ error: 'Error loading posts' });
+    }
+});
+
 router.get('/', async (req, res) => {
 
     const perPage = 6;

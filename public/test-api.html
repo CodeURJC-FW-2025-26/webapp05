@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test API</title>
+    <style>
+        pre {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            max-height: 500px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>API Test</h1>
+    <button onclick="testAPI()">Test API</button>
+    <hr>
+    <pre id="result">Waiting...</pre>
+
+    <script>
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/posts?page=1');
+
+                document.getElementById('result').textContent = `Status: ${response.status} ${response.statusText}\n`;
+
+                const text = await response.text();
+                document.getElementById('result').textContent += `Response:\n${text}`;
+
+                if (response.ok) {
+                    const data = JSON.parse(text);
+                    document.getElementById('result').textContent += `\n\nParsed JSON:\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (err) {
+                document.getElementById('result').textContent = `Error: ${err.message}\n${err.stack}`;
+            }
+        }
+
+        // Test immediately on load
+        window.addEventListener('load', testAPI);
+    </script>
+</body>
+
+</html>
