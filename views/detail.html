@@ -226,8 +226,11 @@
                 errorMessage.textContent = 'An unexpected error occurred';
                 errorModal.show();
             } finally {
-                spinner.style.display = 'none';
-                button.disabled = false;
+                // Loading wheel delete after delay
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                    button.disabled = false;
+                }, 500);
             }
         });
 
