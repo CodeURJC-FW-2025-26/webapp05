@@ -1,9 +1,5 @@
-/**
- * Create Card Form Handler
- * Handles AJAX submission and validation for creating new Pokemon cards
- */
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize image upload with drag & drop
+    // Initialize image upload with drag & drop and preview/remove controls
     const imageUploader = initImageUpload({
         fileInputId: 'image',
         dropZoneId: 'image-drop-zone',
@@ -19,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const successMessage = document.getElementById('success-message');
     const viewCardLink = document.getElementById('view-card-link');
 
-    // Bootstrap error modal
+    // Bootstrap error modal (used to surface client/server error summaries)
     let errorModal, errorMessageEl;
     const errorModalEl = document.getElementById('errorModal');
     if (errorModalEl && window.bootstrap) {
@@ -30,11 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!form) return;
 
     // Field-level live validation for title + AJAX uniqueness
+    // Rules: required, must start with uppercase letter, and must be unique
     const titleInput = document.getElementById('pokemon_name');
     let lastTitleChecked = '';
     let titleAvailable = true;
     if (titleInput) {
-        // Clear error as user types when requirement is satisfied
+        // Clear error live as soon as current input satisfies the rule
         titleInput.addEventListener('input', function () {
             const title = this.value.trim();
             if (title && /^[\p{Lu}]/u.test(title)) {
@@ -66,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     clearFieldError('pokemon_name');
                 }
             } catch (err) {
-                // On request error, keep current state; backend re-validates on submit
+                // Network/endpoint error: keep current state; backend re-validates on submit
             }
         });
     }
@@ -121,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // Clear previous errors and invalid styles so we can re-render all errors
+        // Clear previous errors and invalid styles so we can render all current errors
         form.querySelectorAll('.field-error').forEach(el => el.remove());
         form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
         form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
@@ -152,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
             errorsList.push(msg);
             hasErrors = true;
         } else {
-            // Check uniqueness before submit
+            // Check uniqueness before submit (server confirms as well)
             try {
                 const r = await fetch(`/api/validate/title?title=${encodeURIComponent(title)}`);
                 const data = await r.json();
@@ -163,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     hasErrors = true;
                 }
             } catch (err) {
-                // If server error, do not block submit here; backend will validate too
+                // If request fails, do not block submit here; backend will validate too
             }
         }
 
@@ -215,24 +212,24 @@ document.addEventListener('DOMContentLoaded', function () {
         if (hasErrors) {
             if (errorModal && errorMessageEl) {
                 if (errorsList.length > 1) {
-                    // Múltiples errores: mostrar lista
-                    const listHtml = '<p><strong>Por favor, corrige los siguientes errores:</strong></p><ul class="text-start">' +
+                    // Multiple errors: render a bulleted list inside the modal
+                    const listHtml = '<p><strong>Please fix the following errors:</strong></p><ul class="text-start">' +
                         errorsList.map(e => `<li>${e}</li>`).join('') +
                         '</ul>';
                     errorMessageEl.innerHTML = listHtml;
                 } else if (errorsList.length === 1) {
-                    // Un solo error: mostrar directo
+                    // Single error: show the text directly
                     errorMessageEl.textContent = errorsList[0];
                 } else {
-                    // Sin errores en la lista pero hasErrors=true
-                    errorMessageEl.textContent = 'Por favor, corrige los errores señalados en el formulario.';
+                    // Edge case: hasErrors=true but no items in the list
+                    errorMessageEl.textContent = 'Please fix the highlighted errors in the form.';
                 }
                 errorModal.show();
             }
             return;
         }
 
-        // Show spinner (inline, ensure visible ~0.5s like reviews)
+        // Show spinner (inline). Keep visible for ~0.5s minimum for UX consistency
         spinner.style.display = 'block';
         const spinnerShownAt = Date.now();
         submitBtn.disabled = true;
@@ -255,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const postId = result.postId;
                 const detailUrl = result.createdPostUrl || (postId ? ('/post/' + postId) : '/');
                 const confirmUrl = `/confirm?message=${encodeURIComponent('Card created successfully.')}&returnUrl=${encodeURIComponent(detailUrl)}&createdPostUrl=${encodeURIComponent(detailUrl)}`;
-                // Redirect will happen in finally after spinner min duration
+                // Redirect happens in finally after spinner min duration
                 window._pendingRedirect = confirmUrl;
             } else {
                 const msg = result.message || result.errors?.join('; ') || 'Error creating the card';
@@ -290,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Renders an error below a field using Bootstrap styles
     function showFieldError(fieldId, message) {
         const field = document.getElementById(fieldId);
         if (!field) return;
@@ -302,6 +300,7 @@ document.addEventListener('DOMContentLoaded', function () {
         field.parentNode.appendChild(errorDiv);
     }
 
+    // Clears error state and feedback for a field
     function clearFieldError(fieldId) {
         const field = document.getElementById(fieldId);
         if (!field) return;
@@ -310,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (existing) existing.remove();
     }
 
+    // Shows an error message inside the image drop zone
     function showDropZoneError(message) {
         const dropZone = document.getElementById('image-drop-zone');
         let errorEl = dropZone.querySelector('.drop-zone-error');

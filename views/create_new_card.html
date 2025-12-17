@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a new card</title>
+    <!-- Bootstrap CSS + icons + app styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="/style/style.css" rel="stylesheet">
@@ -24,11 +25,13 @@
                 <div class="form-main-border">
                     <div class="form-main-body">
                         <div class="form-main-content">
+                            <!-- Main form: 'novalidate' disables native HTML validation in favor of custom JS validation -->
                             <form id="create-card-form" role="form" action="/post/new" method="POST"
                                 enctype="multipart/form-data" novalidate>
                                 <div class="row mb-3">
 
                                     <div class="col-12">
+                                        <!-- Name: required, must start uppercase, uniqueness checked via AJAX -->
                                         <label for="pokemon_name" class="form-label">Name</label>
                                         <input type="text" id="pokemon_name" name="title" class="form-control"
                                             placeholder="Name of the pokemon card (example: Pikachu)" required>
@@ -39,6 +42,7 @@
                                     <!-- Price Form -->
 
                                     <div class="col-12 col-md-6">
+                                        <!-- Price: live validation (> 0) -->
                                         <label for="price" class="form-label">Price</label>
                                         <input type="number" id="price" name="precio" class="form-control" step="0.01"
                                             min="0.01" placeholder="Price of the card" required>
@@ -46,6 +50,7 @@
 
                                     <!-- Collection Form -->
                                     <div class="col-12 col-md-6">
+                                        <!-- Collection: required selection -->
                                         <label for="colection" class="form-label">Colection</label>
                                         <select name="coleccion" id="colection" class="form-select">
                                             <option value="" disabled selected hidden>-----</option>
@@ -60,7 +65,7 @@
                                 </div>
                                 <div class="row mb-3">
 
-                                    <!-- Image Form with Drag & Drop -->
+                                    <!-- Image: drag & drop + live preview + remove (handled in image-upload.js) -->
                                     <div class="col-12">
                                         <label for="image" class="form-label">Image</label>
                                         <div id="image-drop-zone" class="image-drop-zone">
@@ -76,6 +81,7 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <!-- Hidden file input: triggered by clicking the drop zone -->
                                         <input class="form-control" type="file" id="image" name="image" accept="image/*"
                                             style="display: none;" required>
                                     </div>
@@ -83,6 +89,7 @@
                                     <!-- Release Date Form -->
 
                                     <div class="col-12 col-md-6 mt-3">
+                                        <!-- Release date: required -->
                                         <label for="release_date" class="form-label">Release date</label>
                                         <input type="date" id="release_date" name="release_date" class="form-control"
                                             required>
@@ -96,6 +103,7 @@
                                     <!-- Description Form -->
 
                                     <div class="col-12">
+                                        <!-- Description: required, min 10 chars (live validation) -->
                                         <label for="description" class="form-label">Description</label>
                                         <textarea id="description" name="description" class="form-control" rows="4"
                                             placeholder="Description of the pokemon card" required></textarea>
@@ -108,11 +116,13 @@
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <a href="/" class="btn-view-details">Cancel</a>
+                                        <!-- Save: AJAX submit and validation handled in create-card-form.js -->
                                         <button type="submit" id="submit-btn" class="btn-view-details">Save</button>
                                     </div>
                                 </div>
 
                                 <!-- Loading Spinner (inline, same style as review) -->
+                                <!-- Spinner: shown during async submit (~0.5s minimum) -->
                                 <div id="form-spinner" class="form-spinner"
                                     style="display: none; text-align: center; margin-top: 10px;">
                                     <img src="/uploads/loadingWheel.gif" alt="Loading..."
@@ -120,6 +130,7 @@
                                 </div>
 
                                 <!-- Success Message Container -->
+                                <!-- Success message (normally we redirect to confirmation) -->
                                 <div id="success-message" class="form-success-message" style="display: none;">
                                     <h4><i class="fas fa-check-circle"></i> ¡Carta creada con éxito!</h4>
                                     <p>Tu nueva carta Pokémon ha sido añadida.</p>
@@ -128,6 +139,7 @@
                                 </div>
 
                                 <!-- Error Modal (Bootstrap) -->
+                                <!-- Error modal: shown for client-side or server-side errors -->
                                 <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
@@ -160,7 +172,7 @@
         {{> footer}}
     </main>
 
-    <!-- Bootstrap JS debe cargarse ANTES de nuestros scripts para que esté disponible -->
+    <!-- Load order: Bootstrap first; then image and form logic scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/image-upload.js"></script>
     <script src="/js/create-card-form.js"></script>
