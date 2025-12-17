@@ -264,13 +264,14 @@ Encargado de la entidad secundaria (las reseñas): formularios con ajax, formula
 
 ## Javier Rodríguez Gil:
 
-
+Encargado de lo relacionado con las imágenes (drag & drop, image-upload...).
 
 ### Commits más relevantes:
-* 
-* 
-* 
+
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/21bed5b3098124a31519a4d2012e70f3a0345243
+
 ### Ficheros mas trabajados:
 
-
-
+    create-card-form.js
+    edit-card-form.js
+    image-upload.js
