@@ -207,3 +207,67 @@ Hacer página de error y confirmación, además del trabajo en los respectivos a
     router.js
     confirmation.html
     error.html
+
+
+# Práctica 3:
+
+## Vídeo demostrativo
+
+[url del video aquí]
+
+## Participación de cada miembro
+
+## David Esteban Bernardo
+
+
+
+### Commits más relevantes:
+* 
+* 
+* 
+### Ficheros mas trabajados:
+
+
+
+## Mario Aparisi Castro:
+
+
+
+### Commits más relevantes:
+* 
+* 
+* 
+### Ficheros mas trabajados:
+
+
+
+## Izan González Cuevas
+
+Encargado de la entidad secundaria (las reseñas): formularios con ajax, formulario de edición en la propia reseña, validación front y backend con errores y cuadros de diálogo...
+
+### Commits más relevantes:
+
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/29cc5c2d7a9ee21096be34dee64ac79c796d1957
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/717659b18144e68d26d9a84aa85e3a7989bfe25f
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/919449502b6c72d1cc1abf3869549fea00613468
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/e9342d97eec7dce55d7e0cad7b0f97d619904ae8 
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/d9435ab379c45450c09464787a902d312c96db67
+
+### Ficheros mas trabajados:
+
+    detail.html
+    router.js
+    board.js
+
+## Javier Rodríguez Gil:
+
+
+
+### Commits más relevantes:
+* 
+* 
+* 
+### Ficheros mas trabajados:
+
+
+
