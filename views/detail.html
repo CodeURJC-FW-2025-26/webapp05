@@ -157,8 +157,8 @@
             const rating = document.getElementById('rating').value.trim();
 
             let hasError = false;
-
-            // Validate empty fields 
+                
+            // Validate empty fields (client)
 
             if (!nickname) {
                 showError('nickname', 'Nickname is required');
@@ -185,7 +185,7 @@
                 showError('nickname', 'This nickname has already reviewed this card');
                 return;
             }
-
+                
             // Show spinner
             spinner.style.display = 'block';
             button.disabled = true;
