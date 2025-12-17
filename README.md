@@ -219,15 +219,20 @@ Hacer página de error y confirmación, además del trabajo en los respectivos a
 
 ## David Esteban Bernardo
 
+Creación y validación de entidad principal, manejando la lógica de validación compleja y el envío asíncrono.
+
 
 
 ### Commits más relevantes:
-* 
-* 
-* 
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/77ae3f58e56e1deb469b44f85dab2d52b58ede85
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/20274d7d8349386a791fc8b6b544a52ecfcf5eea
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/ab5f14362eb25a950fac2d973bd8507c47a78474
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/1cfb7414b776826bc060dbc78b7c6d6f32547e87
+
 ### Ficheros mas trabajados:
-
-
+create-card-form.js
+create_new_card.html
+router.js
 
 ## Mario Aparisi Castro:
 
