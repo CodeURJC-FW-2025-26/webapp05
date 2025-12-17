@@ -21,14 +21,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!form) return;
 
-    // AJAX check for duplicate title 
+    // Field-level live validation for title + AJAX uniqueness
     const titleInput = document.getElementById('pokemon_name');
     let lastTitleChecked = '';
     let titleAvailable = true;
     if (titleInput) {
+        // Clear error as user types when requirement is satisfied
+        titleInput.addEventListener('input', function () {
+            const title = this.value.trim();
+            if (title && /^[\p{Lu}]/u.test(title)) {
+                clearFieldError('pokemon_name');
+            }
+        });
+
         titleInput.addEventListener('blur', async function () {
             const title = this.value.trim();
-            if (!title) return;
+            if (!title) {
+                showFieldError('pokemon_name', 'El nombre es obligatorio');
+                return;
+            }
+            if (!/^[\p{Lu}]/u.test(title)) {
+                showFieldError('pokemon_name', 'El nombre debe empezar con mayúscula');
+                return;
+            }
+
+            // Only check uniqueness if basic rules pass
             if (title === lastTitleChecked) return;
             lastTitleChecked = title;
             try {
@@ -37,9 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 titleAvailable = !!data.available;
                 if (!titleAvailable) {
                     showFieldError('pokemon_name', 'El título ya existe (debe ser único)');
+                } else {
+                    clearFieldError('pokemon_name');
                 }
             } catch (err) {
-
+                // On request error, keep current state; backend re-validates on submit
             }
         });
     }
@@ -47,8 +66,12 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // Clear previous errors
+        // Clear previous errors and invalid styles so we can re-render all errors
         form.querySelectorAll('.field-error').forEach(el => el.remove());
+        form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        const dzError = document.querySelector('#image-drop-zone .drop-zone-error');
+        if (dzError) dzError.style.display = 'none';
         const errorContainer = form.querySelector('.form-error-container');
         if (errorContainer) errorContainer.style.display = 'none';
 
@@ -172,6 +195,14 @@ document.addEventListener('DOMContentLoaded', function () {
         errorDiv.className = 'invalid-feedback d-block';
         errorDiv.textContent = message;
         field.parentNode.appendChild(errorDiv);
+    }
+
+    function clearFieldError(fieldId) {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+        field.classList.remove('is-invalid');
+        const existing = field.parentNode.querySelector('.invalid-feedback');
+        if (existing) existing.remove();
     }
 
     function showDropZoneError(message) {
