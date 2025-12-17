@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', function () {
         titleInput.addEventListener('blur', async function () {
             const title = this.value.trim();
             if (!title) {
-                showFieldError('pokemon_name', 'El nombre es obligatorio');
+                showFieldError('pokemon_name', 'Name is required');
                 return;
             }
             if (!/^[\p{Lu}]/u.test(title)) {
-                showFieldError('pokemon_name', 'El nombre debe empezar con mayúscula');
+                showFieldError('pokemon_name', 'Name must start with an uppercase letter');
                 return;
             }
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await r.json();
                 titleAvailable = !!data.available;
                 if (!titleAvailable) {
-                    showFieldError('pokemon_name', 'El título ya existe (debe ser único)');
+                    showFieldError('pokemon_name', 'Title already exists (must be unique)');
                 } else {
                     clearFieldError('pokemon_name');
                 }
@@ -75,12 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
         priceInput.addEventListener('blur', function () {
             const v = this.value.trim();
             if (!v) {
-                showFieldError('price', 'El precio es obligatorio');
+                showFieldError('price', 'Price is required');
                 return;
             }
             const n = parseFloat(v);
             if (isNaN(n) || n <= 0) {
-                showFieldError('price', 'El precio debe ser mayor que 0');
+                showFieldError('price', 'Price must be greater than 0');
                 return;
             }
             clearFieldError('price');
@@ -99,11 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
         descInput.addEventListener('blur', function () {
             const text = this.value.trim();
             if (!text) {
-                showFieldError('description', 'La descripción es obligatoria');
+                showFieldError('description', 'Description is required');
                 return;
             }
             if (text.length < 10) {
-                showFieldError('description', 'La descripción debe tener al menos 10 caracteres');
+                showFieldError('description', 'Description must be at least 10 characters');
                 return;
             }
             clearFieldError('description');
@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const imageFile = document.getElementById('image').files[0];
 
         if (!title) {
-            showFieldError('pokemon_name', 'El nombre es obligatorio');
+            showFieldError('pokemon_name', 'Name is required');
             hasErrors = true;
         } else if (!/^[\p{Lu}]/u.test(title)) {
-            showFieldError('pokemon_name', 'El nombre debe empezar con mayúscula');
+            showFieldError('pokemon_name', 'Name must start with an uppercase letter');
             hasErrors = true;
         } else {
             // Check uniqueness before submit
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const r = await fetch(`/api/validate/title?title=${encodeURIComponent(title)}`);
                 const data = await r.json();
                 if (!data.available) {
-                    showFieldError('pokemon_name', 'El título ya existe (debe ser único)');
+                    showFieldError('pokemon_name', 'Title already exists (must be unique)');
                     hasErrors = true;
                 }
             } catch (err) {
@@ -153,33 +153,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (!precio) {
-            showFieldError('price', 'El precio es obligatorio');
+            showFieldError('price', 'Price is required');
             hasErrors = true;
         } else if (parseFloat(precio) <= 0) {
-            showFieldError('price', 'El precio debe ser mayor que 0');
+            showFieldError('price', 'Price must be greater than 0');
             hasErrors = true;
         }
 
         if (!coleccion) {
-            showFieldError('colection', 'Selecciona una colección');
+            showFieldError('colection', 'Select a collection');
             hasErrors = true;
         }
 
         if (!releaseDate) {
-            showFieldError('release_date', 'La fecha de lanzamiento es obligatoria');
+            showFieldError('release_date', 'Release date is required');
             hasErrors = true;
         }
 
         if (!description) {
-            showFieldError('description', 'La descripción es obligatoria');
+            showFieldError('description', 'Description is required');
             hasErrors = true;
         } else if (description.length < 10) {
-            showFieldError('description', 'La descripción debe tener al menos 10 caracteres');
+            showFieldError('description', 'Description must be at least 10 characters');
             hasErrors = true;
         }
 
         if (!imageFile) {
-            showDropZoneError('La imagen es obligatoria');
+            showDropZoneError('Image is required');
             hasErrors = true;
         }
 
@@ -211,11 +211,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Redirect will happen in finally after spinner min duration
                 window._pendingRedirect = confirmUrl;
             } else {
-                showFormError(result.message || result.errors?.join('; ') || 'Error al crear la carta');
+                showFormError(result.message || result.errors?.join('; ') || 'Error creating the card');
             }
         } catch (error) {
             console.error('Error:', error);
-            showFormError('Error inesperado al crear la carta');
+            showFormError('Unexpected error while creating the card');
         } finally {
             const elapsed = Date.now() - spinnerShownAt;
             const hide = () => {
