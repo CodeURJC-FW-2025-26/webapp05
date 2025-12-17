@@ -18,6 +18,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const spinner = document.getElementById('form-spinner');
     const successMessage = document.getElementById('success-message');
     const viewCardLink = document.getElementById('view-card-link');
+    // Bootstrap error modal
+    let errorModal, errorMessageEl;
+    const errorModalEl = document.getElementById('errorModal');
+    if (errorModalEl && window.bootstrap) {
+        errorModal = new bootstrap.Modal(errorModalEl);
+        errorMessageEl = document.getElementById('errorMessage');
+    }
+    // Bootstrap error modal
+    let errorModal, errorMessageEl;
+    const errorModalEl = document.getElementById('errorModal');
+    if (errorModalEl && window.bootstrap) {
+        errorModal = new bootstrap.Modal(errorModalEl);
+        errorMessageEl = document.getElementById('errorMessage');
+    }
 
     if (!form) return;
 
@@ -124,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Validate fields
         let hasErrors = false;
+        const errorsList = [];
 
         const title = document.getElementById('pokemon_name').value.trim();
         const precio = document.getElementById('price').value.trim();
@@ -133,10 +148,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const imageFile = document.getElementById('image').files[0];
 
         if (!title) {
-            showFieldError('pokemon_name', 'Name is required');
+            const msg = 'Name is required';
+            showFieldError('pokemon_name', msg);
+            errorsList.push(msg);
             hasErrors = true;
         } else if (!/^[\p{Lu}]/u.test(title)) {
-            showFieldError('pokemon_name', 'Name must start with an uppercase letter');
+            const msg = 'Name must start with an uppercase letter';
+            showFieldError('pokemon_name', msg);
+            errorsList.push(msg);
             hasErrors = true;
         } else {
             // Check uniqueness before submit
@@ -144,7 +163,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const r = await fetch(`/api/validate/title?title=${encodeURIComponent(title)}`);
                 const data = await r.json();
                 if (!data.available) {
-                    showFieldError('pokemon_name', 'Title already exists (must be unique)');
+                    const msg = 'Title already exists (must be unique)';
+                    showFieldError('pokemon_name', msg);
+                    errorsList.push(msg);
                     hasErrors = true;
                 }
             } catch (err) {
@@ -153,37 +174,58 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (!precio) {
-            showFieldError('price', 'Price is required');
+            const msg = 'Price is required';
+            showFieldError('price', msg);
+            errorsList.push(msg);
             hasErrors = true;
         } else if (parseFloat(precio) <= 0) {
-            showFieldError('price', 'Price must be greater than 0');
+            const msg = 'Price must be greater than 0';
+            showFieldError('price', msg);
+            errorsList.push(msg);
             hasErrors = true;
         }
 
         if (!coleccion) {
-            showFieldError('colection', 'Select a collection');
+            const msg = 'Select a collection';
+            showFieldError('colection', msg);
+            errorsList.push(msg);
             hasErrors = true;
         }
 
         if (!releaseDate) {
-            showFieldError('release_date', 'Release date is required');
+            const msg = 'Release date is required';
+            showFieldError('release_date', msg);
+            errorsList.push(msg);
             hasErrors = true;
         }
 
         if (!description) {
-            showFieldError('description', 'Description is required');
+            const msg = 'Description is required';
+            showFieldError('description', msg);
+            errorsList.push(msg);
             hasErrors = true;
         } else if (description.length < 10) {
-            showFieldError('description', 'Description must be at least 10 characters');
+            const msg = 'Description must be at least 10 characters';
+            showFieldError('description', msg);
+            errorsList.push(msg);
             hasErrors = true;
         }
 
         if (!imageFile) {
-            showDropZoneError('Image is required');
+            const msg = 'Image is required';
+            showDropZoneError(msg);
+            errorsList.push(msg);
             hasErrors = true;
         }
 
-        if (hasErrors) return;
+        if (hasErrors) {
+            if (errorModal && errorMessageEl) {
+                const listHtml = `<ul>${errorsList.map(e => `<li>${e}</li>`).join('')}</ul>`;
+                errorMessageEl.innerHTML = `There are errors in the form. Please fix the highlighted fields.${listHtml}`;
+                errorModal.show();
+            }
+            return;
+        }
 
         // Show spinner (inline, ensure visible ~0.5s like reviews)
         spinner.style.display = 'block';
@@ -211,11 +253,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Redirect will happen in finally after spinner min duration
                 window._pendingRedirect = confirmUrl;
             } else {
-                showFormError(result.message || result.errors?.join('; ') || 'Error creating the card');
+                const msg = result.message || result.errors?.join('; ') || 'Error creating the card';
+                showFormError(msg);
+                if (errorModal && errorMessageEl) {
+                    errorMessageEl.textContent = msg;
+                    errorModal.show();
+                }
             }
         } catch (error) {
             console.error('Error:', error);
-            showFormError('Unexpected error while creating the card');
+            const msg = 'Unexpected error while creating the card';
+            showFormError(msg);
+            if (errorModal && errorMessageEl) {
+                errorMessageEl.textContent = msg;
+                errorModal.show();
+            }
         } finally {
             const elapsed = Date.now() - spinnerShownAt;
             const hide = () => {

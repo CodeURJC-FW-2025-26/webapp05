@@ -126,6 +126,24 @@
                                     <a id="view-card-link" href="/" class="btn-view-details"
                                         style="display: inline-block; margin-top: 10px;">Ver carta</a>
                                 </div>
+
+                                <!-- Error Modal (Bootstrap, brand style) -->
+                                <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content brand-modal">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" id="errorMessage">
+                                                There are errors in the form. Please fix the highlighted fields.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn-view-details" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
