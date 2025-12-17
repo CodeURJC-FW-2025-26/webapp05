@@ -85,6 +85,14 @@ router.get('/create_new_card.html', (req, res) => {
     return res.render('create_new_card');
 });
 
+// Generic confirmation page by GET to support client-side redirects after AJAX
+router.get('/confirm', (req, res) => {
+    const message = req.query.message || 'Operación realizada con éxito';
+    const returnUrl = req.query.returnUrl || '/';
+    const createdPostUrl = req.query.createdPostUrl || '';
+    return res.render('confirmation', { message, returnUrl, createdPostUrl });
+});
+
 // Get attributes from the form
 router.post('/post/new', upload.single('image'), async (req, res) => {
     try {

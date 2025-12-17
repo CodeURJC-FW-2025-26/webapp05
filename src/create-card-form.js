@@ -112,8 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (hasErrors) return;
 
-        // Show spinner
+        // Show spinner (inline, ensure visible ~0.5s like reviews)
         spinner.style.display = 'block';
+        const spinnerShownAt = Date.now();
         submitBtn.disabled = true;
 
         try {
@@ -130,16 +131,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
 
             if (result.success) {
-                // Hide form elements and show success message
-                form.querySelectorAll('.row').forEach(row => row.style.display = 'none');
-                spinner.style.display = 'none';
-                successMessage.style.display = 'block';
-
-                if (result.postId) {
-                    viewCardLink.href = '/post/' + result.postId;
-                } else if (result.createdPostUrl) {
-                    viewCardLink.href = result.createdPostUrl;
-                }
+                // Keep the form visible; show spinner briefly then redirect to confirmation page
+                const postId = result.postId;
+                const detailUrl = result.createdPostUrl || (postId ? ('/post/' + postId) : '/');
+                const confirmUrl = `/confirm?message=${encodeURIComponent('Card created successfully.')}&returnUrl=${encodeURIComponent(detailUrl)}&createdPostUrl=${encodeURIComponent(detailUrl)}`;
+                // Redirect will happen in finally after spinner min duration
+                window._pendingRedirect = confirmUrl;
             } else {
                 showFormError(result.message || result.errors?.join('; ') || 'Error al crear la carta');
             }
@@ -147,8 +144,21 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             showFormError('Error inesperado al crear la carta');
         } finally {
-            spinner.style.display = 'none';
-            submitBtn.disabled = false;
+            const elapsed = Date.now() - spinnerShownAt;
+            const hide = () => {
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+                if (window._pendingRedirect) {
+                    const url = window._pendingRedirect;
+                    window._pendingRedirect = null;
+                    window.location.href = url;
+                }
+            };
+            if (elapsed < 500) {
+                setTimeout(hide, 500 - elapsed);
+            } else {
+                hide();
+            }
         }
     });
 
