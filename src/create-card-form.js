@@ -63,6 +63,53 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Live validation: Price (> 0)
+    const priceInput = document.getElementById('price');
+    if (priceInput) {
+        priceInput.addEventListener('input', function () {
+            const v = this.value.trim();
+            if (v && !isNaN(v) && parseFloat(v) > 0) {
+                clearFieldError('price');
+            }
+        });
+        priceInput.addEventListener('blur', function () {
+            const v = this.value.trim();
+            if (!v) {
+                showFieldError('price', 'El precio es obligatorio');
+                return;
+            }
+            const n = parseFloat(v);
+            if (isNaN(n) || n <= 0) {
+                showFieldError('price', 'El precio debe ser mayor que 0');
+                return;
+            }
+            clearFieldError('price');
+        });
+    }
+
+    // Live validation: Description (min 10 chars)
+    const descInput = document.getElementById('description');
+    if (descInput) {
+        descInput.addEventListener('input', function () {
+            const len = this.value.trim().length;
+            if (len >= 10) {
+                clearFieldError('description');
+            }
+        });
+        descInput.addEventListener('blur', function () {
+            const text = this.value.trim();
+            if (!text) {
+                showFieldError('description', 'La descripción es obligatoria');
+                return;
+            }
+            if (text.length < 10) {
+                showFieldError('description', 'La descripción debe tener al menos 10 caracteres');
+                return;
+            }
+            clearFieldError('description');
+        });
+    }
+
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -125,6 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!description) {
             showFieldError('description', 'La descripción es obligatoria');
+            hasErrors = true;
+        } else if (description.length < 10) {
+            showFieldError('description', 'La descripción debe tener al menos 10 caracteres');
             hasErrors = true;
         }
 

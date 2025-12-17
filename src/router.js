@@ -118,6 +118,7 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
 
         if (!release_date) errors.push('Release date cannot be empty');
         if (!description) errors.push('Description cannot be empty');
+        if (description && description.length < 10) errors.push('Description must be at least 10 characters');
 
         if (!date_added) {
             // set server-side default to today (YYYY-MM-DD)
