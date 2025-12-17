@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Show spinner
         spinner.style.display = 'block';
+        const spinnerShownAt = Date.now();
         submitBtn.disabled = true;
 
         try {
@@ -95,10 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
 
             if (result.success) {
-                // Hide form elements and show success message
-                form.querySelectorAll('.row').forEach(row => row.style.display = 'none');
-                spinner.style.display = 'none';
-                successMessage.style.display = 'block';
+                // Keep success flag for finally block
+                window._editSuccess = true;
             } else {
                 showFormError(result.message || result.errors?.join('; ') || 'Error al actualizar la carta');
             }
@@ -106,8 +105,22 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             showFormError('Error inesperado al actualizar la carta');
         } finally {
-            spinner.style.display = 'none';
-            submitBtn.disabled = false;
+            const elapsed = Date.now() - spinnerShownAt;
+            const hide = () => {
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+                if (window._editSuccess) {
+                    // Hide form elements and show success message
+                    form.querySelectorAll('.row').forEach(row => row.style.display = 'none');
+                    successMessage.style.display = 'block';
+                    window._editSuccess = false;
+                }
+            };
+            if (elapsed < 500) {
+                setTimeout(hide, 500 - elapsed);
+            } else {
+                hide();
+            }
         }
     });
 

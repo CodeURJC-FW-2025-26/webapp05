@@ -55,8 +55,9 @@ export class InfiniteScroll {
         this.isLoading = true;
 
         // Show loading indicator
+        const spinnerShownAt = Date.now();
         if (this.loadingIndicator) {
-            this.loadingIndicator.style.display = 'flex';
+            this.loadingIndicator.style.display = 'block';
         }
 
         try {
@@ -87,11 +88,18 @@ export class InfiniteScroll {
             console.error('Error loading more posts:', error);
             this.showError('Error loading more cards. Please try again.');
         } finally {
-            this.isLoading = false;
-
-            // Hide loading indicator
-            if (this.loadingIndicator) {
-                this.loadingIndicator.style.display = 'none';
+            const elapsed = Date.now() - spinnerShownAt;
+            const hide = () => {
+                this.isLoading = false;
+                // Hide loading indicator
+                if (this.loadingIndicator) {
+                    this.loadingIndicator.style.display = 'none';
+                }
+            };
+            if (elapsed < 500) {
+                setTimeout(hide, 500 - elapsed);
+            } else {
+                hide();
             }
         }
     }
