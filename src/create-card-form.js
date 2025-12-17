@@ -18,13 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const spinner = document.getElementById('form-spinner');
     const successMessage = document.getElementById('success-message');
     const viewCardLink = document.getElementById('view-card-link');
-    // Bootstrap error modal
-    let errorModal, errorMessageEl;
-    const errorModalEl = document.getElementById('errorModal');
-    if (errorModalEl && window.bootstrap) {
-        errorModal = new bootstrap.Modal(errorModalEl);
-        errorMessageEl = document.getElementById('errorMessage');
-    }
+
     // Bootstrap error modal
     let errorModal, errorMessageEl;
     const errorModalEl = document.getElementById('errorModal');
@@ -220,8 +214,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (hasErrors) {
             if (errorModal && errorMessageEl) {
-                const listHtml = `<ul>${errorsList.map(e => `<li>${e}</li>`).join('')}</ul>`;
-                errorMessageEl.innerHTML = `There are errors in the form. Please fix the highlighted fields.${listHtml}`;
+                if (errorsList.length > 1) {
+                    // Múltiples errores: mostrar lista
+                    const listHtml = '<p><strong>Por favor, corrige los siguientes errores:</strong></p><ul class="text-start">' +
+                        errorsList.map(e => `<li>${e}</li>`).join('') +
+                        '</ul>';
+                    errorMessageEl.innerHTML = listHtml;
+                } else if (errorsList.length === 1) {
+                    // Un solo error: mostrar directo
+                    errorMessageEl.textContent = errorsList[0];
+                } else {
+                    // Sin errores en la lista pero hasErrors=true
+                    errorMessageEl.textContent = 'Por favor, corrige los errores señalados en el formulario.';
+                }
                 errorModal.show();
             }
             return;
@@ -254,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 window._pendingRedirect = confirmUrl;
             } else {
                 const msg = result.message || result.errors?.join('; ') || 'Error creating the card';
-                showFormError(msg);
                 if (errorModal && errorMessageEl) {
                     errorMessageEl.textContent = msg;
                     errorModal.show();
@@ -263,7 +267,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) {
             console.error('Error:', error);
             const msg = 'Unexpected error while creating the card';
-            showFormError(msg);
             if (errorModal && errorMessageEl) {
                 errorMessageEl.textContent = msg;
                 errorModal.show();
@@ -317,16 +320,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         errorEl.textContent = message;
         errorEl.style.display = 'block';
-    }
-
-    function showFormError(message) {
-        let errorContainer = form.querySelector('.form-error-container');
-        if (!errorContainer) {
-            errorContainer = document.createElement('div');
-            errorContainer.className = 'form-error-container alert alert-danger mt-3';
-            form.insertBefore(errorContainer, form.firstChild);
-        }
-        errorContainer.textContent = message;
-        errorContainer.style.display = 'block';
     }
 });
