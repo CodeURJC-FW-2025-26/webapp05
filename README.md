@@ -231,14 +231,17 @@ Hacer página de error y confirmación, además del trabajo en los respectivos a
 
 ## Mario Aparisi Castro:
 
+Encargado de los errores de validación al borrar reseñas y cartas, y hacer el scroll infinito
 
 
 ### Commits más relevantes:
-* 
-* 
-* 
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/a4cf11f109c3de0864bd5db584ab4c6dbd2a40c2
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/562339be41e127ca34d9b727ad6b04c8dc07ab79
+* https://github.com/CodeURJC-FW-2025-26/webapp05/commit/1b4a05047c32c7241b3b4951d4dfd84976115fc1
 ### Ficheros mas trabajados:
-
+infinite-scroll.js
+index.js
+router.js
 
 
 ## Izan González Cuevas
